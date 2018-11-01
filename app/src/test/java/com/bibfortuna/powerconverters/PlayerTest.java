@@ -15,17 +15,18 @@ import org.junit.Test;
 public class PlayerTest {
     @Test
     public void printCharacterSheet() {
+        System.out.println("Testing multiclass constructor");
 //        Player tester = new Player("Tigo Ripplez", "Male", Species.RODIAN, new JediConsular(), 20, 7, 12, 7, 16, 17, 18, true);
 //        tester.levelUp(new Scoundrel(), 7, true);
 //        tester.levelUp(new Noble(), 6, true);
 
-        Player jonah = new Player(new Scoundrel(), 13, new JediGuardian(), 7, true);
-        jonah.printSkills();
-        jonah.printAttributes();
-        jonah.printSavingThrows();
-        jonah.printMisc();
-        jonah.printHealth();
-        jonah.printCombat();
+//        Player jonah = new Player(new Scoundrel(), 13, new JediGuardian(), 7, true);
+//        jonah.printSkills();
+//        jonah.printAttributes();
+//        jonah.printSavingThrows();
+//        jonah.printMisc();
+//        jonah.printHealth();
+//        jonah.printCombat();
 
 //        Player yolo = new Player();
 //        yolo.printSkills();
@@ -36,6 +37,12 @@ public class PlayerTest {
 //        yolo.printCombat();
 //        yolo.printFeats();
 
-        //Player multi = new Player(new JediConsular(), 12, new Scoundrel(), 8, true);
+        Player multi = new Player(new JediConsular(), 12, new Scoundrel(), 8, true, "feats");
+    }
+
+    @Test
+    public void printConstructor3() {
+        System.out.println("Testing printConstructor3");
+        //Player test = new Player(Species.BOTHAN, new Scout(), 20, true, "list");
     }
 }

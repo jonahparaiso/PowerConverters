@@ -8,8 +8,8 @@ public class NPC extends Player {
         super();
         expRewarded = level;
     }
-    public NPC(Species r, Classs c, int lvl, boolean printing) {
-        super(r, c, lvl, printing);
+    public NPC(Species r, Classs c, int lvl, boolean printing, String printType) {
+        super(r, c, lvl, printing, printType);
         //TODO Need to figure out how much exp to reward, based on class, level, species, etc.
     }
 }

@@ -11,24 +11,21 @@ import java.util.HashMap;
 public class Player {
     protected Dice die;//NOT THE VITALITY DIE, this is used to randomly determine data
     protected final String name;
-    protected final Species race;
-    protected final String gender;
+    private final Species race;
+    private final String gender;
     protected int level;
-    protected int forceLevel;
-    protected int exp;
+    private int forceLevel;
+    private int exp;
     protected int credits;
-    protected Planet homeworld;
+    private Planet homeworld;
 
     protected HashMap<String, Classs> classes;
-    protected int classPenalty;
-    protected String firstClass;
+    private int classPenalty;
+    private String firstClass;
 
     /**
      * For the purpose of leveling up and multiclassing, there needs to be a reference to the newest
      * class leveling up.
-     */
-
-    /**
      * Attributes
      * Main: The ^permanent^ (not final only because it could be incremented every four levels) stat.
      * <p>
@@ -47,120 +44,123 @@ public class Player {
      * 8=5+3. To be clear, this does NOT make his Temp DEX score go up by 10 from 16 -> 26. TODO
      */
     protected int STR;
-    protected int sMod;
-    protected int strTempScore;
-    protected int strTempMod;
-    protected boolean isStrBuffed;
+    private int sMod;
+    private int strTempScore;
+    private int strTempMod;
+    private boolean isStrBuffed;
 
     protected int DEX;
-    protected int dMod;
-    protected int dexTempMod;
-    protected int dexTempScore;
-    protected boolean isDexBuffed;
+    private int dMod;
+    private int dexTempMod;
+    private int dexTempScore;
+    private boolean isDexBuffed;
 
     protected int CON;
-    protected int cMod;
-    protected int conTempScore;
-    protected int conTempMod;
-    protected boolean isConBuffed;
+    private int cMod;
+    private int conTempScore;
+    private int conTempMod;
+    private boolean isConBuffed;
 
     protected int INT;
-    protected int iMod;
-    protected int intTempScore;
-    protected int intTempMod;
-    protected boolean isIntBuffed;
+    private int iMod;
+    private int intTempScore;
+    private int intTempMod;
+    private boolean isIntBuffed;
 
     protected int WIS;
-    protected int wMod;
-    protected int wisTempScore;
-    protected int wisTempMod;
-    protected boolean isWisBuffed;
+    private int wMod;
+    private int wisTempScore;
+    private int wisTempMod;
+    private boolean isWisBuffed;
 
     protected int CHA;
-    protected int chMod;
-    protected int chaTempScore;
-    protected int chaTempMod;
-    protected boolean isChaBuffed;
+    private int chMod;
+    private int chaTempScore;
+    private int chaTempMod;
+    private boolean isChaBuffed;
 
 
     /**
      * Saving Throws
      */
-    protected int fortitude;// = baseFortitude + cMod + fortitudeMiscMod;
-    protected int baseFortitude;
-    protected int fortitudeMiscMod;
+    private int fortitude;// = baseFortitude + cMod + fortitudeMiscMod;
+    private int baseFortitude;
+    private int fortitudeMiscMod;
 
-    protected int reflex;// = baseReflex + dmod + reflexMiscMod;
-    protected int baseReflex;
-    protected int reflexMiscMod;
+    private int reflex;// = baseReflex + dmod + reflexMiscMod;
+    private int baseReflex;
+    private int reflexMiscMod;
 
     protected int will;// = baseWill + wMod + willMiscMod;
-    protected int baseWill;
-    protected int willMiscMod;
+    private int baseWill;
+    private int willMiscMod;
 
     /**
      * Combat
      */
     protected int bab;
-    protected int sizeMod;
+    private int sizeMod;
 
-    protected int melee;// = bab + sMod + sizeMod + meleeMiscMod;
-    protected int meleeMiscMod;
+    private int melee;// = bab + sMod + sizeMod + meleeMiscMod;
+    private int meleeMiscMod;
 
-    protected int ranged;// = bab + dMod + sizeMod + meleeMiscMod;
-    protected int rangedMiscMod;
+    private int ranged;// = bab + dMod + sizeMod + meleeMiscMod;
+    private int rangedMiscMod;
 
     protected int defense;// = 10 + classDefBonus + dMod + dexTempMod + sizeMod + defenseMiscBonus + dodgeBonus
-    protected int dodgeBonus;
-    protected int classDefBonus;
-    protected int defenseMiscBonus;
+    private int dodgeBonus;
+    private int classDefBonus;
+    private int defenseMiscBonus;
     //protected int defenseArmorCheck;
 
-    protected int speed;
+    private int speed;
 
-    protected int initiative;// = dMod + initiativeMiscBonus
-    protected int initiativeMiscBonus;
+    private int initiative;// = dMod + initiativeMiscBonus
+    private int initiativeMiscBonus;
 
     /**
      * Health
      */
-    protected int vitalityRolls;
-    protected int maxVP;
-    protected int currentVP;
-    protected int maxWP;
-    protected int currentWP;
-    protected int vitalityDie;
+    private int vitalityRolls;
+    private int maxVP;
+    private int currentVP;
+    private int maxWP;
+    private int currentWP;
+    private int vitalityDie;
 
     /**
      * Miscellaneous data fields
      */
     protected int reputation;
-    protected int forcePoints;
-    protected int darkSidePoints;
+    private int forcePoints;
+    private int darkSidePoints;
 
     //Arrays of skills, 39 regular skills and 20 force skills
     protected Skill[] skills;
-    protected Skill[] forceSkills;
-    protected int skillPointsToSpend;
-    protected int totalRanks;
+    private Skill[] forceSkills;
+    private int skillPointsToSpend;
+    private int totalRanks;
 
-    protected LinkedList<Language> languages;
+    private LinkedList<Language> languages;
 
     protected LinkedList<Ability> abilities;
 
     //TODO Need to add the rest of the member variables and figure out how to do feats, items, etc.
     public HashMap<String,Feat> feats;
-    protected HashMap<String,Feat> featLibrary;
+    private HashMap<String,Feat> featLibrary;
 
 
-    /**TODO Weapons and Armor*/
+    /*TODO Weapons and Armor*/
     //protected LinkedList<Item> items;
     //protected LinkedList<Weapon> weapons;
 
-    public Player() {
+    /**
+     * The most random character constructor.
+     */
+    Player() {
         this.die = new Dice();
         int lvl = die.roll(20);
-        boolean printing = true;
+        boolean printing = die.roll(3) > 1;
         switch (die.roll(2)) {
             case 1:
                 gender = "male";
@@ -185,13 +185,12 @@ public class Player {
         refreshMods();
         applyClasss(c, printing);
 
-        levelUp(c, lvl, printing);
+        levelUp(c, lvl, printing, "LIST");
 
         //testing all feats
         for (String key : featLibrary.keySet())
             addFeat(key, printing);
         initializeFeats(printing);
-
 
         if (printing) {
             printSkills();
@@ -219,7 +218,7 @@ public class Player {
      * @param wis = starting Wisdom
      * @param cha = starting Charisma
      */
-    public Player(String n, String sex, Species r, Classs c, int lvl, int str, int dex, int con, int iq, int wis, int cha, boolean printing) {
+    public Player(String n, String sex, Species r, Classs c, int lvl, int str, int dex, int con, int iq, int wis, int cha, boolean printing, String printType) {
         if (lvl > 20) {
             System.out.printf("Max level for %s is 20", n);
             lvl = 20;
@@ -253,11 +252,10 @@ public class Player {
         applySpeciesBonus(r, printing);
         refreshMods();
         applyClasss(c, printing);
-        levelUp(c, lvl, printing);
+        levelUp(c, lvl, printing, printType);
         //testing all feats
         for (String key : featLibrary.keySet())
             addFeat(key, printing);
-        feats.put("Force Flight", featLibrary.get("Force Flight"));
         initializeFeats(printing);
     }
 
@@ -265,12 +263,15 @@ public class Player {
      * Randomly generates information based on the class, species, and level. Useful for DM's for instant
      * NPC spawning.
      *
-     * @param n   Name of the NPC.
      * @param r   The species of the NPC.
      * @param c   The class of the NPC, their stats will be based on the class's favorite attributes.
      * @param lvl The lvl of the NPC.
+     * @param printing Whether to print out statements for debugging or not.
+     * @param printType The desired function to print out for debugging. See printingType() for possible values
      */
-    public Player(Species r, Classs c, int lvl, boolean printing) {
+    Player(Species r, Classs c, int lvl, boolean printing, String printType) {
+        printType = printType.toUpperCase();
+
         this.die = new Dice();
         switch (die.roll(2)) {
             case 1:
@@ -280,7 +281,7 @@ public class Player {
                 gender = "female";
                 break;
         }
-        this.name = randomName(gender,printing);
+        this.name = randomName(gender, printingCheck(printType, "randomName"));
         if (lvl > 20) {
             System.out.printf("Max level for %s is 20", name);
             lvl = 20;
@@ -297,20 +298,20 @@ public class Player {
         this.level = 0;
         this.exp = 0;
 
-        randomNewAttributes(c, printing);
+        randomNewAttributes(c, printingCheck(printType, "randomNewAttributes"));
         initializeForcePoints(c, lvl);
-        applySpeciesBonus(r, printing);
+        applySpeciesBonus(r, printingCheck(printType, "applySpeciesBonus"));
         refreshMods();
-        applyClasss(c, printing);
+        applyClasss(c, printingCheck(printType, "applyClasss"));
 
-        levelUp(c, lvl, printing);
+        levelUp(c, lvl, printing, printType);
 
         //testing all feats
         for (String key : featLibrary.keySet())
-            addFeat(key, printing);
-        initializeFeats(printing);
+            addFeat(key, printingCheck(printType, "addFeat"));
+        initializeFeats(printingCheck(printType, "initializeFeats"));
 
-        if (printing) {
+        if (printingCheck(printType, "list")) {
             printSkills();
             printAttributes();
             printSavingThrows();
@@ -321,7 +322,17 @@ public class Player {
         }
     }
 
-    public Player(Classs c1, int c1lvl, Classs c2, int c2lvl, boolean printing) {
+    /**
+     * Multiclass constructor that specifies two classes and the desired appropriate levels.
+     *
+     * @param c1 First classs
+     * @param c1lvl Target level for the first classs
+     * @param c2 Second classs
+     * @param c2lvl Target level for the second classs
+     * @param printing Boolean for whether or not to print out debugging statements
+     * @param printType String specifying which method to print debugging statements
+     */
+    Player(Classs c1, int c1lvl, Classs c2, int c2lvl, boolean printing, String printType) {
         this.die = new Dice();
         switch (die.roll(2)) {
             case 1:
@@ -348,24 +359,53 @@ public class Player {
         classes.put(c1.name, c1);
         firstClass = c1.name;
         this.race = randomRace();
-        this.name = randomName(gender,printing);
+        this.name = randomName(gender, printingCheck(printType, "randomName"));
 
         initializeForcePoints(c1, c1lvl);
         this.level = 0;
         this.exp = 0;
 
-        randomNewAttributes(c1, printing);
-        applySpeciesBonus(race, printing);
+        randomNewAttributes(c1, printingCheck(printType, "randomNewAttributes"));
+        applySpeciesBonus(race, printingCheck(printType, "applySpeciesBonus"));
         refreshMods();
-        applyClasss(c1, printing);
+        applyClasss(c1, printingCheck(printType, "applyClasss"));
 
-        levelUp(c1, c1lvl, printing);
-        levelUp(c2, c2lvl, printing);
+        levelUp(c1, c1lvl, printing, printType);
+        levelUp(c2, c2lvl, printing, printType);
 
         //testing all feats
         for (String key : featLibrary.keySet())
-            addFeat(key, printing);
-        initializeFeats(printing);
+            addFeat(key, printingCheck(printType, "addFeat"));
+        initializeFeats(printingCheck(printType, "initializeFeats"));
+        if (printingCheck(printType, "feats"))
+            printFeats();
+    }
+
+    /**
+     * A helper method for the Player constructors. You may not necessarily want to see debugging print
+     * statements for each method, so this returns the correct boolean based on a set given number of
+     * functions to check for.
+     * @param printType The String to compare to the set of examples.
+     * @return true if the two inputs match, false otherwise
+     */
+    private boolean printingCheck(String printType, String functionName) {
+        printType = printType.toUpperCase();
+        functionName = functionName.toUpperCase();
+        if (printType.contains("HELP") || printType.length() < 3 ) {
+            System.out.println("Valid entries for printingCheck are:\n" +
+                    "randomName, randomNewAttributes, applySpeciesBonus,lvlUpAttributes, lvlUpNewSkills,\n" +
+                    "lvlUpVitality, updateExp, applyClasss, levelUp, initializeFeats, feats, list, all, none\n");
+            return Boolean.parseBoolean(null);
+        }
+        try {
+            return printType.equals(functionName);
+        }
+        catch (NullPointerException e) {
+            System.out.println("Invalid entry for String functionName. Valid entries are:\n" +
+                    "randomName, randomNewAttributes, initializeForcePoints, applySpeciesBonus,\n" +
+                    "refreshMods, applyClasss, levelUp, initializeFeats, feats, list, all, none\n");
+            return Boolean.parseBoolean(null);
+        }
     }
 
     //////////////////////////////////FOR RANDOM NPC GENERATION/////////////////////////////////////
@@ -377,7 +417,7 @@ public class Player {
      * @param sex Desired gender for the name.
      * @return The randomly generated first and last name.
      */
-    public String randomName(String sex, boolean printing) {
+    private String randomName(String sex, boolean printing) {
         sex = sex.toLowerCase();
         String firstName, lastName;
         int firstIndex;
@@ -400,7 +440,7 @@ public class Player {
         }
         lastName = LastNames.values()[die.roll(FirstName.values().length)-1].getName().replace('_','\'');
         if (printing)
-            System.out.printf("Picked %s for a last name.%n", lastName, f.getGender());
+            System.out.printf("Picked %s for a last name.%n", lastName);
         return firstName + " " + lastName;
     }
 
@@ -410,7 +450,7 @@ public class Player {
      * @param isNPC Whether or not the function should include nonHero classes
      * @return The randomized class
      */
-    public Classs randomClasss(boolean isNPC) {
+    private Classs randomClasss(boolean isNPC) {
         Classs c;
         int classesToChooseFrom;
         if (isNPC)
@@ -489,6 +529,7 @@ public class Player {
         }
         Arrays.sort(temp);
 
+        //Depending on which stat is their favorite, give the appropriate (best or next best) roll to said attribute
         switch (c.getFav1()) {
             case STR:
                 this.STR = temp[6];
@@ -620,7 +661,7 @@ public class Player {
     }
 
     /**Generates an unbiased race. True random.
-     * @return The species randomly generated based on class.
+     * @return The species randomly generated taken from the list of all species.
      */
     private Species randomRace() {
         int randomSpecies = die.roll(Species.values().length) - 1;
@@ -628,9 +669,9 @@ public class Player {
     }
 
     /**
-     * Smartly picks attributes to level up, prioritizing odd numbers (to get a modifier change). The
-     * Attribute chosen is based on their class and favorite Attributes. If an attribute is already at
-     * 18, they will chose another attribute to increment.
+     * Smartly picks attributes to increment, prioritizing odd numbers (to get a modifier change). The
+     * Attribute chosen is based on their class and favorite Attributes. If an Attribute is already at
+     * 18, they will chose another Attribute to increment.
      *
      * @param c   the given class to base choices on
      * @param lvl the target level to level up to, ASSUMING THE PLAYER IS GOING UP FROM ZERO
@@ -640,911 +681,71 @@ public class Player {
         int attributePointsLeft = 0;
         if (lvl % 4 == 0)
             attributePointsLeft = 1;
-        boolean incremented;
         if (printing)
             System.out.printf("Leveling up %s's attributes by %d points%n", this.name, attributePointsLeft);
         while (attributePointsLeft > 0) {
-            incremented = false;
 
             //First even out all stats starting with their favorites, then start buffing their favorite stats
-
-            switch (c.getFav1()) {
-                case STR:
-                    if (this.STR % 2 != 0 ) {
-                        this.STR++;
-                        attributePointsLeft--;
-                        incremented = true;
-                        if (printing)
-                            System.out.printf("%s's STR went from %d to %d%n", this.name, STR - 1, STR);
-                    }
-
-                    break;
-                case DEX:
-                    if (this.DEX % 2 != 0 ) {
-                        this.DEX++;
-                        attributePointsLeft--;
-                        incremented = true;
-                        if (printing)
-                            System.out.printf("%s's DEX went from %d to %d%n", this.name, DEX - 1, DEX);
-                    }
-                    break;
-                case CON:
-                    if (this.CON % 2 != 0 ) {
-                        this.CON++;
-                        attributePointsLeft--;
-                        incremented = true;
-                        if (printing)
-                            System.out.printf("%s's CON went from %d to %d%n", this.name, CON - 1, CON);
-                    }
-
-                    break;
-                case INT:
-                    if (this.INT % 2 != 0 ) {
-                        this.INT++;
-                        attributePointsLeft--;
-                        incremented = true;
-                        if (printing)
-                            System.out.printf("%s's INT went from %d to %d%n", this.name, INT - 1, INT);
-                    }
-
-                    break;
-                case WIS:
-                    if (this.WIS % 2 != 0 ) {
-                        this.WIS++;
-                        attributePointsLeft--;
-                        incremented = true;
-                        if (printing)
-                            System.out.printf("%s's WIS went from %d to %d%n", this.name, WIS - 1, WIS);
-                    }
-
-                    break;
-                case CHA:
-                    if (this.CHA % 2 != 0 ) {
-                        this.CHA++;
-                        attributePointsLeft--;
-                        incremented = true;
-                        if (printing)
-                            System.out.printf("%s's CHA went from %d to %d%n", this.name, CHA - 1, CHA);
-                    }
-                    break;
-            }
-
-            if (attributePointsLeft == 0 || incremented)
-                continue;
-
-            switch (c.getFav2()) {
-                case STR:
-                    if (this.STR % 2 != 0 ) {
-                        this.STR++;
-                        attributePointsLeft--;
-                        incremented = true;
-                        if (printing)
-                            System.out.printf("%s's STR went from %d to %d%n", this.name, STR - 1, STR);
-                    }
-
-                    break;
-                case DEX:
-                    if (this.DEX % 2 != 0 ) {
-                        this.DEX++;
-                        attributePointsLeft--;
-                        incremented = true;
-                        if (printing)
-                            System.out.printf("%s's DEX went from %d to %d%n", this.name, DEX - 1, DEX);
-                    }
-                    break;
-                case CON:
-                    if (this.CON % 2 != 0 ) {
-                        this.CON++;
-                        attributePointsLeft--;
-                        incremented = true;
-                        if (printing)
-                            System.out.printf("%s's CON went from %d to %d%n", this.name, CON - 1, CON);
-                    }
-
-                    break;
-                case INT:
-                    if (this.INT % 2 != 0 ) {
-                        this.INT++;
-                        attributePointsLeft--;
-                        incremented = true;
-                        if (printing)
-                            System.out.printf("%s's INT went from %d to %d%n", this.name, INT - 1, INT);
-                    }
-
-                    break;
-                case WIS:
-                    if (this.WIS % 2 != 0 ) {
-                        this.WIS++;
-                        attributePointsLeft--;
-                        incremented = true;
-                        if (printing)
-                            System.out.printf("%s's WIS went from %d to %d%n", this.name, WIS - 1, WIS);
-                    }
-
-                    break;
-                case CHA:
-                    if (this.CHA % 2 != 0 ) {
-                        this.CHA++;
-                        attributePointsLeft--;
-                        incremented = true;
-                        if (printing)
-                            System.out.printf("%s's CHA went from %d to %d%n", this.name, CHA - 1, CHA);
-                    }
-                    break;
-            }
-
-            if (attributePointsLeft == 0 || incremented)
-                continue;
-
-            switch (c.getFav3()) {
-                case STR:
-                    if (this.STR % 2 != 0 ) {
-                        this.STR++;
-                        attributePointsLeft--;
-                        incremented = true;
-                        if (printing)
-                            System.out.printf("%s's STR went from %d to %d%n", this.name, STR - 1, STR);
-                    }
-
-                    break;
-                case DEX:
-                    if (this.DEX % 2 != 0 ) {
-                        this.DEX++;
-                        attributePointsLeft--;
-                        incremented = true;
-                        if (printing)
-                            System.out.printf("%s's DEX went from %d to %d%n", this.name, DEX - 1, DEX);
-                    }
-                    break;
-                case CON:
-                    if (this.CON % 2 != 0 ) {
-                        this.CON++;
-                        attributePointsLeft--;
-                        incremented = true;
-                        if (printing)
-                            System.out.printf("%s's CON went from %d to %d%n", this.name, CON - 1, CON);
-                    }
-
-                    break;
-                case INT:
-                    if (this.INT % 2 != 0 ) {
-                        this.INT++;
-                        attributePointsLeft--;
-                        incremented = true;
-                        if (printing)
-                            System.out.printf("%s's INT went from %d to %d%n", this.name, INT - 1, INT);
-                    }
-
-                    break;
-                case WIS:
-                    if (this.WIS % 2 != 0 ) {
-                        this.WIS++;
-                        attributePointsLeft--;
-                        incremented = true;
-                        if (printing)
-                            System.out.printf("%s's WIS went from %d to %d%n", this.name, WIS - 1, WIS);
-                    }
-
-                    break;
-                case CHA:
-                    if (this.CHA % 2 != 0 ) {
-                        this.CHA++;
-                        attributePointsLeft--;
-                        incremented = true;
-                        if (printing)
-                            System.out.printf("%s's CHA went from %d to %d%n", this.name, CHA - 1, CHA);
-                    }
-                    break;
-            }
-
-            if (attributePointsLeft == 0 || incremented)
-                continue;
-
-            switch (c.getFav4()) {
-                case STR:
-                    if (this.STR % 2 != 0 ) {
-                        this.STR++;
-                        attributePointsLeft--;
-                        incremented = true;
-                        if (printing)
-                            System.out.printf("%s's STR went from %d to %d%n", this.name, STR - 1, STR);
-                    }
-
-                    break;
-                case DEX:
-                    if (this.DEX % 2 != 0 ) {
-                        this.DEX++;
-                        attributePointsLeft--;
-                        incremented = true;
-                        if (printing)
-                            System.out.printf("%s's DEX went from %d to %d%n", this.name, DEX - 1, DEX);
-                    }
-                    break;
-                case CON:
-                    if (this.CON % 2 != 0 ) {
-                        this.CON++;
-                        attributePointsLeft--;
-                        incremented = true;
-                        if (printing)
-                            System.out.printf("%s's CON went from %d to %d%n", this.name, CON - 1, CON);
-                    }
-
-                    break;
-                case INT:
-                    if (this.INT % 2 != 0 ) {
-                        this.INT++;
-                        attributePointsLeft--;
-                        incremented = true;
-                        if (printing)
-                            System.out.printf("%s's INT went from %d to %d%n", this.name, INT - 1, INT);
-                    }
-
-                    break;
-                case WIS:
-                    if (this.WIS % 2 != 0 ) {
-                        this.WIS++;
-                        attributePointsLeft--;
-                        incremented = true;
-                        if (printing)
-                            System.out.printf("%s's WIS went from %d to %d%n", this.name, WIS - 1, WIS);
-                    }
-
-                    break;
-                case CHA:
-                    if (this.CHA % 2 != 0 ) {
-                        this.CHA++;
-                        attributePointsLeft--;
-                        incremented = true;
-                        if (printing)
-                            System.out.printf("%s's CHA went from %d to %d%n", this.name, CHA - 1, CHA);
-                    }
-                    break;
-            }
-
-            if (attributePointsLeft == 0 || incremented)
-                continue;
-
-            switch (c.getFav5()) {
-                case STR:
-                    if (this.STR % 2 != 0 ) {
-                        this.STR++;
-                        attributePointsLeft--;
-                        incremented = true;
-                        if (printing)
-                            System.out.printf("%s's STR went from %d to %d%n", this.name, STR - 1, STR);
-                    }
-
-                    break;
-                case DEX:
-                    if (this.DEX % 2 != 0 ) {
-                        this.DEX++;
-                        attributePointsLeft--;
-                        incremented = true;
-                        if (printing)
-                            System.out.printf("%s's DEX went from %d to %d%n", this.name, DEX - 1, DEX);
-                    }
-                    break;
-                case CON:
-                    if (this.CON % 2 != 0 ) {
-                        this.CON++;
-                        attributePointsLeft--;
-                        incremented = true;
-                        if (printing)
-                            System.out.printf("%s's CON went from %d to %d%n", this.name, CON - 1, CON);
-                    }
-
-                    break;
-                case INT:
-                    if (this.INT % 2 != 0 ) {
-                        this.INT++;
-                        attributePointsLeft--;
-                        incremented = true;
-                        if (printing)
-                            System.out.printf("%s's INT went from %d to %d%n", this.name, INT - 1, INT);
-                    }
-
-                    break;
-                case WIS:
-                    if (this.WIS % 2 != 0 ) {
-                        this.WIS++;
-                        attributePointsLeft--;
-                        incremented = true;
-                        if (printing)
-                            System.out.printf("%s's WIS went from %d to %d%n", this.name, WIS - 1, WIS);
-                    }
-
-                    break;
-                case CHA:
-                    if (this.CHA % 2 != 0 ) {
-                        this.CHA++;
-                        attributePointsLeft--;
-                        incremented = true;
-                        if (printing)
-                            System.out.printf("%s's CHA went from %d to %d%n", this.name, CHA - 1, CHA);
-                    }
-                    break;
-            }
-
-            if (attributePointsLeft == 0 || incremented)
-                continue;
-
-            switch (c.getFav6()) {
-                case STR:
-                    if (this.STR % 2 != 0 ) {
-                        this.STR++;
-                        attributePointsLeft--;
-                        incremented = true;
-                        if (printing)
-                            System.out.printf("%s's STR went from %d to %d%n", this.name, STR - 1, STR);
-                    }
-
-                    break;
-                case DEX:
-                    if (this.DEX % 2 != 0 ) {
-                        this.DEX++;
-                        attributePointsLeft--;
-                        incremented = true;
-                        if (printing)
-                            System.out.printf("%s's DEX went from %d to %d%n", this.name, DEX - 1, DEX);
-                    }
-                    break;
-                case CON:
-                    if (this.CON % 2 != 0 ) {
-                        this.CON++;
-                        attributePointsLeft--;
-                        incremented = true;
-                        if (printing)
-                            System.out.printf("%s's CON went from %d to %d%n", this.name, CON - 1, CON);
-                    }
-
-                    break;
-                case INT:
-                    if (this.INT % 2 != 0 ) {
-                        this.INT++;
-                        attributePointsLeft--;
-                        incremented = true;
-                        if (printing)
-                            System.out.printf("%s's INT went from %d to %d%n", this.name, INT - 1, INT);
-                    }
-
-                    break;
-                case WIS:
-                    if (this.WIS % 2 != 0 ) {
-                        this.WIS++;
-                        attributePointsLeft--;
-                        incremented = true;
-                        if (printing)
-                            System.out.printf("%s's WIS went from %d to %d%n", this.name, WIS - 1, WIS);
-                    }
-
-                    break;
-                case CHA:
-                    if (this.CHA % 2 != 0 ) {
-                        this.CHA++;
-                        attributePointsLeft--;
-                        incremented = true;
-                        if (printing)
-                            System.out.printf("%s's CHA went from %d to %d%n", this.name, CHA - 1, CHA);
-                    }
-                    break;
-            }
-
-            if (attributePointsLeft == 0 || incremented)
-                continue;
-
-            switch (c.getFav1()) {
-                //All stats are even, now get the main attribute up to 18.
-                case STR:
-                    if (this.STR % 2 != 0 || this.STR < 18 && !incremented) {
-                        this.STR++;
-                        attributePointsLeft--;
-                        incremented = true;
-                        if (printing)
-                            System.out.printf("%s's STR went from %d to %d%n", this.name, STR - 1, STR);
-                    }
-
-                    break;
-                case DEX:
-                    if (this.DEX % 2 != 0 || this.DEX < 18 && !incremented) {
-                        this.DEX++;
-                        attributePointsLeft--;
-                        incremented = true;
-                        if (printing)
-                            System.out.printf("%s's DEX went from %d to %d%n", this.name, DEX - 1, DEX);
-                    }
-                    break;
-                case CON:
-                    if (this.CON % 2 != 0 || this.CON < 18 && !incremented) {
-                        this.CON++;
-                        attributePointsLeft--;
-                        incremented = true;
-                        if (printing)
-                            System.out.printf("%s's CON went from %d to %d%n", this.name, CON - 1, CON);
-                    }
-
-                    break;
-                case INT:
-                    if (this.INT % 2 != 0 || this.INT < 18 && !incremented) {
-                        this.INT++;
-                        attributePointsLeft--;
-                        incremented = true;
-                        if (printing)
-                            System.out.printf("%s's INT went from %d to %d%n", this.name, INT - 1, INT);
-                    }
-
-                    break;
-                case WIS:
-                    if (this.WIS % 2 != 0 || this.WIS < 18 && !incremented) {
-                        this.WIS++;
-                        attributePointsLeft--;
-                        incremented = true;
-                        if (printing)
-                            System.out.printf("%s's WIS went from %d to %d%n", this.name, WIS - 1, WIS);
-                    }
-
-                    break;
-                case CHA:
-                    if (this.CHA % 2 != 0 || this.CHA < 18 && !incremented) {
-                        this.CHA++;
-                        attributePointsLeft--;
-                        incremented = true;
-                        if (printing)
-                            System.out.printf("%s's CHA went from %d to %d%n", this.name, CHA - 1, CHA);
-                    }
-                    break;
-            }
-
-            if (attributePointsLeft == 0 || incremented)
-                continue;
-
-            switch (c.getFav2()) {
-                //Get the second favorite attribute up to 16.
-                case STR:
-                    if (this.STR % 2 != 0 || this.STR < 16 && !incremented) {
-                        this.STR++;
-                        attributePointsLeft--;
-                        incremented = true;
-                        if (printing)
-                            System.out.printf("%s's STR went from %d to %d%n", this.name, STR - 1, STR);
-                    }
-
-                    break;
-                case DEX:
-                    if (this.DEX % 2 != 0 || this.DEX < 16 && !incremented) {
-                        this.DEX++;
-                        attributePointsLeft--;
-                        incremented = true;
-                        if (printing)
-                            System.out.printf("%s's DEX went from %d to %d%n", this.name, DEX - 1, DEX);
-                    }
-                    break;
-                case CON:
-                    if (this.CON % 2 != 0 || this.CON < 16 && !incremented) {
-                        this.CON++;
-                        attributePointsLeft--;
-                        incremented = true;
-                        if (printing)
-                            System.out.printf("%s's CON went from %d to %d%n", this.name, CON - 1, CON);
-                    }
-
-                    break;
-                case INT:
-                    if (this.INT % 2 != 0 || this.INT < 16 && !incremented) {
-                        this.INT++;
-                        attributePointsLeft--;
-                        incremented = true;
-                        if (printing)
-                            System.out.printf("%s's INT went from %d to %d%n", this.name, INT - 1, INT);
-                    }
-
-                    break;
-                case WIS:
-                    if (this.WIS % 2 != 0 || this.WIS < 16 && !incremented) {
-                        this.WIS++;
-                        attributePointsLeft--;
-                        incremented = true;
-                        if (printing)
-                            System.out.printf("%s's WIS went from %d to %d%n", this.name, WIS - 1, WIS);
-                    }
-
-                    break;
-                case CHA:
-                    if (this.CHA % 2 != 0 || this.CHA < 16 && !incremented) {
-                        this.CHA++;
-                        attributePointsLeft--;
-                        incremented = true;
-                        if (printing)
-                            System.out.printf("%s's CHA went from %d to %d%n", this.name, CHA - 1, CHA);
-                    }
-                    break;
-            }
-
-            if (attributePointsLeft == 0 || incremented)
-                continue;
-
-            switch (c.getFav3()) {
-                //Get the third favorite stat to 14.
-                case STR:
-                    if (this.STR % 2 != 0 && !incremented && this.STR < 14) {
-                        this.STR++;
-                        attributePointsLeft--;
-                        incremented = true;
-                        if (printing)
-                            System.out.printf("%s's STR went from %d to %d%n", this.name, STR - 1, STR);
-                    }
-
-                    break;
-                case DEX:
-                    if (this.DEX % 2 != 0 && !incremented && this.DEX < 14) {
-                        this.DEX++;
-                        attributePointsLeft--;
-                        incremented = true;
-                        if (printing)
-                            System.out.printf("%s's DEX went from %d to %d%n", this.name, DEX - 1, DEX);
-                    }
-                    break;
-                case CON:
-                    if (this.CON % 2 != 0 && !incremented && this.CON < 14) {
-                        this.CON++;
-                        attributePointsLeft--;
-                        incremented = true;
-                        if (printing)
-                            System.out.printf("%s's CON went from %d to %d%n", this.name, CON - 1, CON);
-                    }
-
-                    break;
-                case INT:
-                    if (this.INT % 2 != 0 && !incremented && this.INT < 14) {
-                        this.INT++;
-                        attributePointsLeft--;
-                        incremented = true;
-                        if (printing)
-                            System.out.printf("%s's INT went from %d to %d%n", this.name, INT - 1, INT);
-                    }
-
-                    break;
-                case WIS:
-                    if (this.WIS % 2 != 0 && !incremented && this.WIS < 14) {
-                        this.WIS++;
-                        attributePointsLeft--;
-                        incremented = true;
-                        if (printing)
-                            System.out.printf("%s's WIS went from %d to %d%n", this.name, WIS - 1, WIS);
-                    }
-
-                    break;
-                case CHA:
-                    if (this.CHA % 2 != 0 && !incremented && this.CHA < 14) {
-                        this.CHA++;
-                        attributePointsLeft--;
-                        incremented = true;
-                        if (printing)
-                            System.out.printf("%s's CHA went from %d to %d%n", this.name, CHA - 1, CHA);
-                    }
-                    break;
-            }
-
-            if (attributePointsLeft == 0 || incremented)
-                continue;
-
-            switch (c.getFav3()) {
-                /**If this is reached, then it means all stats are even, with the top two at
-                 * least at 18 and 16. Now we can get the third to 14*/
-                case STR:
-                    if (this.STR < 14 && !incremented) {
-                        this.STR++;
-                        attributePointsLeft--;
-                        incremented = true;
-                        if (printing)
-                            System.out.printf("%s's STR went from %d to %d%n", this.name, STR - 1, STR);
-                    }
-
-                    break;
-                case DEX:
-                    if (this.DEX < 14 && !incremented) {
-                        this.DEX++;
-                        attributePointsLeft--;
-                        incremented = true;
-                        if (printing)
-                            System.out.printf("%s's DEX went from %d to %d%n", this.name, DEX - 1, DEX);
-                    }
-                    break;
-                case CON:
-                    if (this.CON < 14 && !incremented) {
-                        this.CON++;
-                        attributePointsLeft--;
-                        incremented = true;
-                        if (printing)
-                            System.out.printf("%s's CON went from %d to %d%n", this.name, CON - 1, CON);
-                    }
-
-                    break;
-                case INT:
-                    if (this.INT < 14 && !incremented) {
-                        this.INT++;
-                        attributePointsLeft--;
-                        incremented = true;
-                        if (printing)
-                            System.out.printf("%s's INT went from %d to %d%n", this.name, INT - 1, INT);
-                    }
-
-                    break;
-                case WIS:
-                    if (this.WIS < 14 && !incremented) {
-                        this.WIS++;
-                        attributePointsLeft--;
-                        incremented = true;
-                        if (printing)
-                            System.out.printf("%s's WIS went from %d to %d%n", this.name, WIS - 1, WIS);
-                    }
-
-                    break;
-                case CHA:
-                    if (this.CHA < 14 && !incremented) {
-                        this.CHA++;
-                        attributePointsLeft--;
-                        incremented = true;
-                        if (printing)
-                            System.out.printf("%s's CHA went from %d to %d%n", this.name, CHA - 1, CHA);
-                    }
-                    break;
-            }
-
-            if (attributePointsLeft == 0 || incremented)
-                continue;
-
-            switch (c.getFav4()) {
-                /**If this is reached, then it means the top five stats are even, with the top three at
-                 * least at 18, 16, 14. Now we can get the fourth to 12.
-                 * */
-                case STR:
-                    if (this.STR < 12 && !incremented) {
-                        this.STR++;
-                        attributePointsLeft--;
-                        incremented = true;
-                        if (printing)
-                            System.out.printf("%s's STR went from %d to %d%n", this.name, STR - 1, STR);
-                    }
-
-                    break;
-                case DEX:
-                    if (this.DEX < 12 && !incremented) {
-                        this.DEX++;
-                        attributePointsLeft--;
-                        incremented = true;
-                        if (printing)
-                            System.out.printf("%s's DEX went from %d to %d%n", this.name, DEX - 1, DEX);
-                    }
-                    break;
-                case CON:
-                    if (this.CON < 12 && !incremented) {
-                        this.CON++;
-                        attributePointsLeft--;
-                        incremented = true;
-                        if (printing)
-                            System.out.printf("%s's CON went from %d to %d%n", this.name, CON - 1, CON);
-                    }
-
-                    break;
-                case INT:
-                    if (this.INT < 12 && !incremented) {
-                        this.INT++;
-                        attributePointsLeft--;
-                        incremented = true;
-                        if (printing)
-                            System.out.printf("%s's INT went from %d to %d%n", this.name, INT - 1, INT);
-                    }
-
-                    break;
-                case WIS:
-                    if (this.WIS < 12 && !incremented) {
-                        this.WIS++;
-                        attributePointsLeft--;
-                        incremented = true;
-                        if (printing)
-                            System.out.printf("%s's WIS went from %d to %d%n", this.name, WIS - 1, WIS);
-                    }
-
-                    break;
-                case CHA:
-                    if (this.CHA < 12 && !incremented) {
-                        this.CHA++;
-                        attributePointsLeft--;
-                        incremented = true;
-                        if (printing)
-                            System.out.printf("%s's CHA went from %d to %d%n", this.name, CHA - 1, CHA);
-                    }
-                    break;
-            }
-
-            if (attributePointsLeft == 0 || incremented)
-                continue;
-
-            switch (c.getFav5()) {
-                /**If this is reached, then it means the top five stats are even, with the top four at
-                 * least at 18, 16, 14, 12. Now we can get the fifth stat to 12
-                 * */
-                case STR:
-                    if (this.STR < 12 && !incremented) {
-                        this.STR++;
-                        attributePointsLeft--;
-                        incremented = true;
-                        if (printing)
-                            System.out.printf("%s's STR went from %d to %d%n", this.name, STR - 1, STR);
-                    }
-
-                    break;
-                case DEX:
-                    if (this.DEX < 12 && !incremented) {
-                        this.DEX++;
-                        attributePointsLeft--;
-                        incremented = true;
-                        if (printing)
-                            System.out.printf("%s's DEX went from %d to %d%n", this.name, DEX - 1, DEX);
-                    }
-                    break;
-                case CON:
-                    if (this.CON < 12 && !incremented) {
-                        this.CON++;
-                        attributePointsLeft--;
-                        incremented = true;
-                        if (printing)
-                            System.out.printf("%s's CON went from %d to %d%n", this.name, CON - 1, CON);
-                    }
-
-                    break;
-                case INT:
-                    if (this.INT < 12 && !incremented) {
-                        this.INT++;
-                        attributePointsLeft--;
-                        incremented = true;
-                        if (printing)
-                            System.out.printf("%s's INT went from %d to %d%n", this.name, INT - 1, INT);
-                    }
-
-                    break;
-                case WIS:
-                    if (this.WIS < 12 && !incremented) {
-                        this.WIS++;
-                        attributePointsLeft--;
-                        incremented = true;
-                        if (printing)
-                            System.out.printf("%s's WIS went from %d to %d%n", this.name, WIS - 1, WIS);
-                    }
-
-                    break;
-                case CHA:
-                    if (this.CHA < 12 && !incremented) {
-                        this.CHA++;
-                        attributePointsLeft--;
-                        incremented = true;
-                        if (printing)
-                            System.out.printf("%s's CHA went from %d to %d%n", this.name, CHA - 1, CHA);
-                    }
-                    break;
-            }
-
-            if (attributePointsLeft == 0 || incremented)
-                continue;
-
-            switch (c.getFav6()) {
-                /**If this is reached, then it means the top five stats are even, with the top five at
-                 * least at 18, 16, 14, 12, 12. Now we can get the sixth stat up to 10.
-                 * */
-                case STR:
-                    if (this.STR < 10 || this.STR % 2 != 0 && !incremented) {
-                        this.STR++;
-                        attributePointsLeft--;
-                        incremented = true;
-                        if (printing)
-                            System.out.printf("%s's STR went from %d to %d%n", this.name, STR - 1, STR);
-                    }
-
-                    break;
-                case DEX:
-                    if (this.DEX < 10 || this.DEX % 2 != 0 && !incremented) {
-                        this.DEX++;
-                        attributePointsLeft--;
-                        incremented = true;
-                        if (printing)
-                            System.out.printf("%s's DEX went from %d to %d%n", this.name, DEX - 1, DEX);
-                    }
-                    break;
-                case CON:
-                    if (this.CON < 10 || this.CON % 2 != 0 && !incremented) {
-                        this.CON++;
-                        attributePointsLeft--;
-                        incremented = true;
-                        if (printing)
-                            System.out.printf("%s's CON went from %d to %d%n", this.name, CON - 1, CON);
-                    }
-
-                    break;
-                case INT:
-                    if (this.INT < 10 || this.INT % 2 != 0 && !incremented) {
-                        this.INT++;
-                        attributePointsLeft--;
-                        incremented = true;
-                        if (printing)
-                            System.out.printf("%s's INT went from %d to %d%n", this.name, INT - 1, INT);
-                    }
-
-                    break;
-                case WIS:
-                    if (this.WIS < 10 || this.WIS % 2 != 0 && !incremented) {
-                        this.WIS++;
-                        attributePointsLeft--;
-                        incremented = true;
-                        if (printing)
-                            System.out.printf("%s's WIS went from %d to %d%n", this.name, WIS - 1, WIS);
-                    }
-
-                    break;
-                case CHA:
-                    if (this.CHA < 10 || this.CHA % 2 != 0 && !incremented) {
-                        this.CHA++;
-                        attributePointsLeft--;
-                        incremented = true;
-                        if (printing)
-                            System.out.printf("%s's CHA went from %d to %d%n", this.name, CHA - 1, CHA);
-                    }
-                    break;
-            }
-
-            if (attributePointsLeft == 0 || incremented)
-                continue;
-
-            switch (c.getFav1()) {
-                /**If this is somehow reached, then the hero has fantastic starting stats, and it
-                 * means the top five stats are even, with the top four at least at 18, 16, 14, 12,
-                 * 12, and 10. Now we can max out the best stat.
-                 * */
-                case STR:
-                    if (!incremented) {
-                        this.STR++;
-                        attributePointsLeft--;
-                        incremented = true;
-                        if (printing)
-                            System.out.printf("%s's STR went from %d to %d%n", this.name, STR - 1, STR);
-                    }
-
-                    break;
-                case DEX:
-                    this.DEX++;
-                    attributePointsLeft--;
-                    incremented = true;
-                    if (printing)
-                        System.out.printf("%s's DEX went from %d to %d%n", this.name, DEX - 1, DEX);
-                    break;
-                case CON:
-                    this.CON++;
-                    attributePointsLeft--;
-                    incremented = true;
-                    if (printing)
-                        System.out.printf("%s's CON went from %d to %d%n", this.name, CON - 1, CON);
-                    break;
-                case INT:
-                    this.INT++;
-                    attributePointsLeft--;
-                    incremented = true;
-                    if (printing)
-                        System.out.printf("%s's INT went from %d to %d%n", this.name, INT - 1, INT);
-                    break;
-                case WIS:
-                    this.WIS++;
-                    attributePointsLeft--;
-                    incremented = true;
-                    if (printing)
-                        System.out.printf("%s's WIS went from %d to %d%n", this.name, WIS - 1, WIS);
-                    break;
-                case CHA:
-                    this.CHA++;
-                    attributePointsLeft--;
-                    incremented = true;
-                    if (printing)
-                        System.out.printf("%s's CHA went from %d to %d%n", this.name, CHA - 1, CHA);
-                    break;
-            }
+            attributePointsLeft = evenOutAttributes(c.getFav1(), printing);
+            if (attributePointsLeft == 0)
+                break;
+
+            attributePointsLeft = evenOutAttributes(c.getFav2(), printing);
+            if (attributePointsLeft == 0)
+                break;
+
+            attributePointsLeft = evenOutAttributes(c.getFav3(), printing);
+            if (attributePointsLeft == 0)
+                break;
+
+            attributePointsLeft = evenOutAttributes(c.getFav4(), printing);
+            if (attributePointsLeft == 0)
+                break;
+
+            attributePointsLeft = evenOutAttributes(c.getFav5(), printing);
+            if (attributePointsLeft == 0)
+                break;
+
+            attributePointsLeft = evenOutAttributes(c.getFav6(), printing);
+            if (attributePointsLeft == 0)
+                break;
+
+            //All stats are now even, so now get the favorite Attribute up to 18
+            attributePointsLeft = attributeToTarget(c.getFav1(), printing, 18);
+            if (attributePointsLeft == 0)
+                break;
+
+            //Get the second favorite attribute up to 16.
+            attributePointsLeft = attributeToTarget(c.getFav2(), printing, 16);
+            if (attributePointsLeft == 0)
+                break;
+
+            //Get the third favorite stat to 14.
+            attributePointsLeft = attributeToTarget(c.getFav3(), printing, 14);
+            if (attributePointsLeft == 0)
+                break;
+
+            //Get the fourth favorite stat to 14
+            attributePointsLeft = attributeToTarget(c.getFav4(), printing, 14);
+            if (attributePointsLeft == 0)
+                break;
+
+            //Get the fifth favorite stat to 12
+            attributePointsLeft = attributeToTarget(c.getFav5(), printing, 12);
+            if (attributePointsLeft == 0)
+                break;
+
+            //Get the sixth favorite stat to 10
+            attributePointsLeft = attributeToTarget(c.getFav6(), printing, 10);
+            if (attributePointsLeft == 0)
+                break;
+
+            /**If this is somehow reached, then the hero has fantastic starting stats, and it
+             * means the stats are at least at 18, 16, 14, 14, 12, and 10. Now we can max out the best stat.
+             * */
+            attributePointsLeft = attributeToTarget(c.getFav1(), printing, 30);
+            if (attributePointsLeft == 0)
+                break;
 
             if (printing) {
                 System.out.printf("Reached end of while loop%nSTR=%d%nDEX=%d%nCON=%d%nINT=%d%nWIS=%d%nCHA=%d%n%nPoints Left=%d%n", STR, DEX, CON, INT, WIS, CHA, attributePointsLeft);
@@ -1554,6 +755,145 @@ public class Player {
         if (printing)
             System.out.printf("Finished leveling up %s's attributes.%n%n", this.name);
         refreshMods();
+    }
+
+    /**
+     * Helper method for the above lvlUpAttribute function. Increments the appropriate Attribute based
+     * on if it is odd. For example, CHA is passed and CHA's value is 13, the return of this function
+     * would be 0 because CHA was incremented to 14.
+     *
+     * @param att The Attribute to increment
+     * @param printing Debugging print statements
+     * @return 0 if the Attribute was incremented, 1 if it was not incremented
+     */
+    private int evenOutAttributes(Attribute att, boolean printing) {
+        switch (att) {
+            case STR:
+                if (this.STR % 2 != 0) {
+                    this.STR++;
+                    if (printing)
+                        System.out.printf("%s's STR went from %d to %d%n", this.name, STR - 1, STR);
+                    return 0;
+                }
+                break;
+
+            case DEX:
+                if (this.DEX % 2 != 0) {
+                    this.DEX++;
+                    if (printing)
+                        System.out.printf("%s's DEX went from %d to %d%n", this.name, DEX - 1, DEX);
+                    return 0;
+                }
+                break;
+
+            case CON:
+                if (this.CON % 2 != 0) {
+                    this.CON++;
+                    if (printing)
+                        System.out.printf("%s's CON went from %d to %d%n", this.name, CON - 1, CON);
+                    return 0;
+                }
+                break;
+
+            case INT:
+                if (this.INT % 2 != 0) {
+                    this.INT++;
+                    if (printing)
+                        System.out.printf("%s's INT went from %d to %d%n", this.name, INT - 1, INT);
+                    return 0;
+                }
+                break;
+            case WIS:
+                if (this.WIS % 2 != 0) {
+                    this.WIS++;
+                    if (printing)
+                        System.out.printf("%s's WIS went from %d to %d%n", this.name, WIS - 1, WIS);
+                    return 0;
+                }
+                break;
+
+            case CHA:
+                if (this.CHA % 2 != 0) {
+                    this.CHA++;
+                    if (printing)
+                        System.out.printf("%s's CHA went from %d to %d%n", this.name, CHA - 1, CHA);
+                    return 0;
+                }
+                break;
+        }
+        //If this is reached, then the attribute was already even, so it wasn't incremented
+        return 1;
+    }
+
+    /**
+     * Helper method for the above lvlUpAttribute function. Increments the appropriate attribute based
+     * on the attribute passed to it and a target integer goal to be reached. For example, STR is passed
+     * along with 18, 1 would be returned if the STR had a value of 19 because it already met the target
+     * goal, so it was not incremented.
+     *
+     * @param att The Attribute to increment
+     * @param printing Debugging print statements
+     * @param target The desired value for the passed in Attribute
+     * @return 0 if the attribute was incremented, 1 if something was not incremented
+     */
+    private int attributeToTarget(Attribute att, boolean printing, int target) {
+        switch (att) {
+            case STR:
+                if (this.STR < target) {
+                    this.STR++;
+                    if (printing)
+                        System.out.printf("%s's STR went from %d to %d%n", this.name, STR - 1, STR);
+                    return 0;
+                }
+                break;
+
+            case DEX:
+                if (this.DEX < target) {
+                    this.DEX++;
+                    if (printing)
+                        System.out.printf("%s's DEX went from %d to %d%n", this.name, DEX - 1, DEX);
+                    return 0;
+                }
+                break;
+
+            case CON:
+                if (this.CON < target) {
+                    this.CON++;
+                    if (printing)
+                        System.out.printf("%s's CON went from %d to %d%n", this.name, CON - 1, CON);
+                    return 0;
+                }
+                break;
+
+            case INT:
+                if (this.INT < target) {
+                    this.INT++;
+                    if (printing)
+                        System.out.printf("%s's INT went from %d to %d%n", this.name, INT - 1, INT);
+                    return 0;
+                }
+                break;
+
+            case WIS:
+                if (this.WIS < target) {
+                    this.WIS++;
+                    if (printing)
+                        System.out.printf("%s's WIS went from %d to %d%n", this.name, WIS - 1, WIS);
+                    return 0;
+                }
+                break;
+
+            case CHA:
+                if (this.CHA < target) {
+                    this.CHA++;
+                    if (printing)
+                        System.out.printf("%s's CHA went from %d to %d%n", this.name, CHA - 1, CHA);
+                    return 0;
+                }
+                break;
+        }
+        //If this is reached, then the attribute had already reached the target, so it wasn't incremented
+        return 1;
     }
 
     /**
@@ -1615,15 +955,15 @@ public class Player {
                     }
                 } else {
                     //This means a regular skill is chosen for a Force sensitive player
-                    if (skills[classSkills.get(skillToIncrement).intValue()].getRank() < max) {
-                        skills[classSkills.get(skillToIncrement).intValue()].addRanks(1, printing);
+                    if (skills[classSkills.get(skillToIncrement)].getRank() < max) {
+                        skills[classSkills.get(skillToIncrement)].addRanks(1, printing);
                         totalRanks++;
                     }
                     //If you reach here, then the skill it rolled for is already maxed out, so pick a new non class skill
                     else {
                         if (tryAgain < tryTimes) {
                             if (printing)
-                                System.out.printf("Trying again. %s is maxed out%n %d more tries.%n",skills[classSkills.get(skillToIncrement).intValue()].getType().getName(), tryTimes-tryAgain);
+                                System.out.printf("Trying again. %s is maxed out%n %d more tries.%n",skills[classSkills.get(skillToIncrement)].getType().getName(), tryTimes-tryAgain);
                             tryAgain++;
                             continue;
                         }
@@ -1660,15 +1000,15 @@ public class Player {
                 if (printing)
                     System.out.printf("SkillToIncrement: %d PointsLeft: %d%n", skillToIncrement, skillPointsToSpend);
                 //Choosing to increment just one Craft(6) and one Knowledge(22)
-                if (skills[classSkills.get(skillToIncrement).intValue()].getRank() < max) {
-                    skills[classSkills.get(skillToIncrement).intValue()].addRanks(1, printing);
+                if (skills[classSkills.get(skillToIncrement)].getRank() < max) {
+                    skills[classSkills.get(skillToIncrement)].addRanks(1, printing);
                     totalRanks++;
                 }
                 //If you reach here, then the skill it rolled for is already maxed out, so pick a new non class skill
                 else {
                     if (tryAgain < tryTimes) {
                         if (printing)
-                            System.out.printf("Trying again. %s is maxed out%n %d more tries.%n",skills[classSkills.get(skillToIncrement).intValue()].getType().getName(), tryTimes-tryAgain);
+                            System.out.printf("Trying again. %s is maxed out%n %d more tries.%n",skills[classSkills.get(skillToIncrement)].getType().getName(), tryTimes-tryAgain);
                         tryAgain++;
                         continue;
                     }
@@ -1715,7 +1055,7 @@ public class Player {
      * @param levels   The amount of levels to level up
      * @param printing If true, print out extra data for debugging
      */
-    protected void levelUp(Classs c, int levels, boolean printing) {
+    private void levelUp(Classs c, int levels, boolean printing, String printType) {
         int currentLvl;
         boolean safe;
 
@@ -1732,13 +1072,13 @@ public class Player {
             if (c.isForce) this.forceLevel++;
             currentLvl++;
             level++;
-            if (printing)
+            if (printing && printType.contains("lvl"))
                 System.out.printf("%n%nLeveling up %s from %d to %d in the %s class%nTotal level: %d%n", name, c.classLvl, currentLvl, c.getName(), level);
-            lvlUpAttributes(c, level, printing);
-            lvlUpNewSkills(c, currentLvl, printing);
-            refreshBaseValues(c, currentLvl, printing);
+            lvlUpAttributes(c, level, printingCheck(printType, "lvlUpAttributes"));
+            lvlUpNewSkills(c, currentLvl, printingCheck(printType, "lvlUpNewSkills"));
+            refreshBaseValues(c, currentLvl, printingCheck(printType, "refreshBaseValues"));
             safe = level %2 != 0;//if level is odd, go safe, otherwise roll a die.
-            lvlUpVitality(c, safe, printing);
+            lvlUpVitality(c, safe, printingCheck(printType, "lvlUpVitality"));
             clearBuffs();
             refreshCombat();
             refreshInitiative();
@@ -1747,10 +1087,10 @@ public class Player {
             refreshSaves();
             updateForcePoints();
             classes.get(c.name).classLvlUp();
-            updateExp(level, printing);
+            updateExp(level, printingCheck(printType, "updateExp"));
             //TODO NEED TO DO FEATS AND ABILITIES/POWERS
 
-            if (printing) {
+            if (printingCheck(printType, "list")) {
                 System.out.printf("%nFinished leveling up %s to %d in the %s class%n%nTotal level: %d%n", name, currentLvl, c.getName(), level);
                 printAttributes();
                 printSavingThrows();
@@ -1758,8 +1098,9 @@ public class Player {
                 printMisc();
                 printHealth();
                 printCombat();
-                printFeats();
             }
+            if (printingCheck(printType, "feats"))
+                printFeats();
             levels--;
         }
     }
@@ -1769,7 +1110,7 @@ public class Player {
      * @param lvl The level to update to
      * @param printing Whether to print or not for debugging purposes
      */
-    public void updateExp(int lvl, boolean printing) {
+    private void updateExp(int lvl, boolean printing) {
         if (lvl == 2){
             exp += 1000;
         }
@@ -1974,7 +1315,7 @@ public class Player {
             }
         }
 
-        /**
+        /*
          * In the standard core rulebook, there doesn't exist any Force Skills that are based on STR
          * or DEX, so the first two cases are superfluous.
          */
@@ -2225,25 +1566,25 @@ public class Player {
      *                 the console.
      */
     private void initializeFeats(boolean printing) {
-        for (String key : feats.keySet()) {
+        for (String key : this.feats.keySet()) {
             //check to see if the feat boosts skills
-            if (feats.get(key).areSkillsBoosted()) {
-                for (int i = 0; i < feats.get(key).getSkills().length; i++) {
+            if (this.feats.get(key).areSkillsBoosted()) {
+                for (int i = 0; i < this.feats.get(key).getSkills().length; i++) {
                     //Loop through the array held by the Feat, inside there is information on which skills are boosted.
                     //Go through and add the bonuses to the corresponding misc bonus in the player skill array.
-                    if (printing && feats.get(key).getSkills()[i] > 0)
+                    if (printing && this.feats.get(key).getSkills()[i] > 0)
                         System.out.printf("Adding %d misc bonus to %s%n",feats.get(key).getSkills()[i], skills[i].getType().getName());
-                    skills[i].addMiscMod(feats.get(key).getSkills()[i]);
+                    skills[i].addMiscMod(this.feats.get(key).getSkills()[i]);
                 }
             }
             //check to see if the Feat boosts Force skills
-            else if (feats.get(key).areFSkillsBoosted()) {
-                for (int i = 0; i < feats.get(key).getForceSkills().length; i++) {
+            else if (this.feats.get(key).areFSkillsBoosted()) {
+                for (int i = 0; i < this.feats.get(key).getForceSkills().length; i++) {
                     //Loop through the array held by the Feat, inside there is information on which skills are boosted.
                     //Go through and add the bonuses to the corresponding misc bonus in the player skill array.
-                    if (printing && feats.get(key).getForceSkills()[i] > 0)
-                        System.out.printf("Adding %d misc bonus to %s%n",feats.get(key).getForceSkills()[i], forceSkills[i].getType().getName());
-                    forceSkills[i].addMiscMod(feats.get(key).getForceSkills()[i]);
+                    if (printing && this.feats.get(key).getForceSkills()[i] > 0)
+                        System.out.printf("Adding %d misc bonus to %s%n",this.feats.get(key).getForceSkills()[i], forceSkills[i].getType().getName());
+                    forceSkills[i].addMiscMod(this.feats.get(key).getForceSkills()[i]);
                 }
             }
             //Alter force skills = 0, 2, 9, 10, 12, 14, 16, 17
@@ -2272,24 +1613,25 @@ public class Player {
                 forceSkills[18].setClassSkill(true);
                 forceSkills[19].setClassSkill(true);
             }
-            if (feats.get(key).getMiscBonus() > 0)
+            if (this.feats.get(key).getMiscBonus() > 0)
                 switch (key) {
                     case "DODGE":
-                        dodgeBonus+=feats.get(key).getMiscBonus();
+                        dodgeBonus += this.feats.get(key).getMiscBonus();
                         break;
                     case "GREAT FORTITUDE":
-                        fortitudeMiscMod+=feats.get(key).getMiscBonus();
+                        fortitudeMiscMod += this.feats.get(key).getMiscBonus();
                     case "HEADSTRONG":
-                        willMiscMod+=feats.get(key).getMiscBonus();
+                        willMiscMod += this.feats.get(key).getMiscBonus();
                     case "IMPROVED CRITICAL":
                         //TODO need to do when I do weapons, probably something like this:
                         //weaponRack(feats.get(key).getSpecialty()).increaseCritical(feats.get(key).getMiscBonus());
                         break;
                     case "IMPROVED INITIATIVE":
-                        initiativeMiscBonus+=4;
+                        initiativeMiscBonus += 4;
                         break;
                 }
-            System.out.printf("%s : %s%n", key, feats.get(key).getInfo());
+            if (printing)
+                System.out.printf("%s : %s%n", key, this.feats.get(key).getInfo());
         }
     }
 
@@ -2323,7 +1665,7 @@ public class Player {
                         if (STR >= reqValue)
                             out = true;
                         else {
-                            requirements.append("   Insufficient " + key + ". Required: " + reqValue + " Has " + STR + "\n");
+                            requirements.append("   Insufficient ").append(key).append(". Required: ").append(reqValue).append(" Has ").append(STR).append("\n");
                             out = false;
                         }
                         break;
@@ -2332,7 +1674,7 @@ public class Player {
                         if (DEX >= reqValue)
                             out = true;
                         else {
-                            requirements.append("   Insufficient " + key + ". Required: " + reqValue + " Has " + DEX + "\n");
+                            requirements.append("   Insufficient ").append(key).append(". Required: ").append(reqValue).append(" Has ").append(DEX).append("\n");
                             out = false;
                         }
                         break;
@@ -2341,7 +1683,7 @@ public class Player {
                         if (CON >= reqValue)
                             out = true;
                         else {
-                            requirements.append("   Insufficient " + key + ". Required: " + reqValue + " Has " + CON + "\n");
+                            requirements.append("   Insufficient ").append(key).append(". Required: ").append(reqValue).append(" Has ").append(CON).append("\n");
                             out = false;
                         }
                         break;
@@ -2350,7 +1692,7 @@ public class Player {
                         if (INT >= reqValue)
                             out = true;
                         else {
-                            requirements.append("   Insufficient " + key + ". Required: " + reqValue + " Has " + INT + "\n");
+                            requirements.append("   Insufficient ").append(key).append(". Required: ").append(reqValue).append(" Has ").append(INT).append("\n");
                             out = false;
                         }
                         break;
@@ -2359,7 +1701,7 @@ public class Player {
                         if (WIS >= reqValue)
                             out = true;
                         else {
-                            requirements.append("   Insufficient " + key + ". Required: " + reqValue + " Has " + WIS + "\n");
+                            requirements.append("   Insufficient ").append(key).append(". Required: ").append(reqValue).append(" Has ").append(WIS).append("\n");
                             out = false;
                         }
                         break;
@@ -2368,7 +1710,7 @@ public class Player {
                         if (CHA >= reqValue)
                             out = true;
                         else {
-                            requirements.append("   Insufficient " + key + ". Required: " + reqValue + " Has " + CHA + "\n");
+                            requirements.append("   Insufficient ").append(key).append(". Required: ").append(reqValue).append(" Has ").append(CHA).append("\n");
                             out = false;
                         }
                         break;
@@ -2377,7 +1719,7 @@ public class Player {
                         if (bab >= reqValue)
                             out = true;
                         else {
-                            requirements.append("   Insufficient " + key + ". Required: " + reqValue + " Has " + bab + "\n");
+                            requirements.append("   Insufficient ").append(key).append(". Required: ").append(reqValue).append(" Has ").append(bab).append("\n");
                             out = false;
                         }
                         break;
@@ -2386,13 +1728,13 @@ public class Player {
             //Check to see if the key is a number, indicating an index of a skill, which means that the
             //value of the key (integer value) represents the required ranks in said skill
             else try {
-                skillIndex = Integer.parseInt(key.toString());
+                skillIndex = Integer.parseInt(key);
                 //check to see if the skill is a regular or force skill. Below means it's a regular skill
                 if (skillIndex < skills.length) {
                     if (skills[skillIndex].getRank() >= reqValue)
                         out = true;
                     else {
-                        requirements.append("   Insufficient " + skills[skillIndex].getType().getName() + ". Required: " + reqValue + " Has " + (int) skills[skillIndex].getRank() + "\n");
+                        requirements.append("   Insufficient ").append(skills[skillIndex].getType().getName()).append(". Required: ").append(reqValue).append(" Has ").append((int) skills[skillIndex].getRank()).append("\n");
                         out = false;
                     }
                 }
@@ -2403,7 +1745,7 @@ public class Player {
                     if (forceSkills[skillIndex].getRank() >= reqValue)
                         out = true;
                     else {
-                        requirements.append("   Insufficient " + forceSkills[skillIndex].getType().getName() + ". Required: " + reqValue + " Has " + (int) forceSkills[skillIndex].getRank() + "\n");
+                        requirements.append("   Insufficient ").append(forceSkills[skillIndex].getType().getName()).append(". Required: ").append(reqValue).append(" Has ").append((int) forceSkills[skillIndex].getRank()).append("\n");
                         out = false;
                     }
                 }
@@ -2418,16 +1760,16 @@ public class Player {
                     }
                     else {
                         out = false;
-                        requirements.append("   Insufficient force level. Required: " + reqValue + " Has: " + forceLevel +  "\n");
+                        requirements.append("   Insufficient force level. Required: ").append(reqValue).append(" Has: ").append(forceLevel).append("\n");
                         continue;
                     }
                 }
-                if (((feats.containsKey(key)) && (map.get(key) == 1)) || ((!feats.containsKey(key)) && (map.get(key) == 0))) {
+                if (((this.feats.containsKey(key)) && (map.get(key) == 1)) || ((!this.feats.containsKey(key)) && (map.get(key) == 0))) {
                     out = true;
                 }
                 else {
                     out = false;
-                    requirements.append("   " + key + "\n");
+                    requirements.append("   ").append(key).append("\n");
                 }
             }
         }
@@ -2450,7 +1792,7 @@ public class Player {
         boolean out = false;
         if (meetsPrereqs(f, printing)) {
             out = true;
-            feats.put(s,f);
+            this.feats.put(s,f);
             if (printing)
                 System.out.printf("     Successfully added %s to %s's feats.%n%n", s, this.name);
         }
@@ -2465,31 +1807,33 @@ public class Player {
     /**
      * Prints out the list of Class skills for the Class object calling this method.
      */
-    public void printSkills() {
+    private void printSkills() {
         System.out.printf("Skill Modifiers for %s are as such:%n", name);
         System.out.println("Skill Name---------------AtMod-Ranks-Misc-Total Skill Modifier");
-        String preBuff, attBuff, doubleDigits;
+        StringBuilder preBuff;
+        String attBuff;
+        String doubleDigits;
         for (Skill temp : skills) {
-            preBuff = temp.getType().getName();
+            preBuff = new StringBuilder(temp.getType().getName());
             while (preBuff.length() < 19)
-                preBuff += " ";
+                preBuff.append(" ");
             if (temp.getAttributeModifier() < 0) attBuff = "";
             else attBuff = " ";
             if (temp.getRank() > 9) doubleDigits = "";
             else doubleDigits = " ";
-            System.out.printf("%s(%s): %d%s   %.0f%s   %d    %d%n", preBuff, temp.getType().getAttribute(), temp.getAttributeModifier(), attBuff, temp.getRank(), doubleDigits, temp.getMisc(), temp.getTotalModifier());
+            System.out.printf("%s(%s): %d%s   %.0f%s   %d    %d%n", preBuff.toString(), temp.getType().getAttribute(), temp.getAttributeModifier(), attBuff, temp.getRank(), doubleDigits, temp.getMisc(), temp.getTotalModifier());
         }
         if (forceLevel > 0) {
             System.out.printf("%nForce Class Skills for %s are as such:%n", name);
             for (Skill temp : forceSkills) {
-                preBuff = temp.getType().getName();
+                preBuff = new StringBuilder(temp.getType().getName());
                 while (preBuff.length() < 19)
-                    preBuff += " ";
+                    preBuff.append(" ");
                 if (temp.getAttributeModifier() < 0) attBuff = "";
                 else attBuff = " ";
                 if (temp.getRank() > 9) doubleDigits = "";
                 else doubleDigits = " ";
-                System.out.printf("%s(%s): %d%s   %.0f%s   %d    %d%n", preBuff, temp.getType().getAttribute(), temp.getAttributeModifier(), attBuff, temp.getRank(), doubleDigits, temp.getMisc(), temp.getTotalModifier());
+                System.out.printf("%s(%s): %d%s   %.0f%s   %d    %d%n", preBuff.toString(), temp.getType().getAttribute(), temp.getAttributeModifier(), attBuff, temp.getRank(), doubleDigits, temp.getMisc(), temp.getTotalModifier());
             }
         }
         System.out.printf("Total Ranks = %d%n",totalRanks);
@@ -2498,7 +1842,7 @@ public class Player {
     /**
      * Print Attributes as they would appear on the character sheet
      */
-    public void printAttributes() {
+    private void printAttributes() {
         String buffer = "";
         String modBuffer = " ";
         System.out.printf("%s's%n     Attributes-Modifier-TempScore-TempMod%n", name);
@@ -2552,7 +1896,7 @@ public class Player {
     /**
      * Prints out the saving throws.
      */
-    public void printSavingThrows() {
+    private void printSavingThrows() {
         String buffer = " ";
         String modBuffer = " ";
         String baseBuff = " ";
@@ -2577,24 +1921,24 @@ public class Player {
         System.out.printf("WILL            %d%s = %d%s  + %d%s  + %d%n", will, buffer, baseWill, baseBuff, wMod, modBuffer, willMiscMod);
     }
 
-    public void printMisc() {
-        String listOfClasses = "";
+    private void printMisc() {
+        StringBuilder listOfClasses = new StringBuilder();
         for (String key : classes.keySet())
-            listOfClasses += String.format(key + " %d ", classes.get(key).classLvl);
+            listOfClasses.append(String.format(key + " %d ", classes.get(key).classLvl));
         System.out.printf("%nCLASS(ES)  = %s%n" +
                             "EXP        = %d%n" +
                             "CREDITS    = %d%n" +
                             "LEVEL      = %d%n" +
                             "FORCE LEVEL= %d%n" +
                             "GENDER     = %s%n" +
-                            "SPECIES    = %s%n", listOfClasses, exp, credits, level, forceLevel, gender, race.name());
+                            "SPECIES    = %s%n", listOfClasses.toString(), exp, credits, level, forceLevel, gender, race.name());
     }
 
-    public void printHealth() {
+    private void printHealth() {
         System.out.printf("%nMAX VITALITY = %d%nCURRENT VP   = %d%nWOUND POINTS = %d%n", maxVP, currentVP, currentWP);
     }
 
-    public void printCombat() {
+    private void printCombat() {
         String mTotalBuff, baseBuff, strBuff, sizeBuff, rTotalBuff, dexBuff;
         if (melee < 10 && melee >= 0) mTotalBuff = " ";
         else mTotalBuff = "";
@@ -2623,11 +1967,11 @@ public class Player {
         System.out.printf("%d%s                 = %d%s     + %d%n",initiative, baseBuff, dMod, dexBuff, initiativeMiscBonus);
     }
 
-    public void printFeats() {
-        System.out.println("FEATS");
-        for (String key : feats.keySet()) {
-            if (feats.get(key).getSpecialty().length() != 0)
-                System.out.printf("%s (%s)%n", key, feats.get(key).getSpecialty());
+    private void printFeats() {
+        System.out.printf("FEATS at lvl %d%n",this.level);
+        for (String key : this.feats.keySet()) {
+            if (this.feats.get(key).getSpecialty().length() != 0)
+                System.out.printf("%s (%s)%n", key, this.feats.get(key).getSpecialty());
             else System.out.println(key);
         }
     }
