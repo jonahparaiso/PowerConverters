@@ -2,8 +2,13 @@ package com.bibfortuna.powerconverters.Classes;
 
 
 import com.bibfortuna.powerconverters.Attribute;
+import com.bibfortuna.powerconverters.Feats.Feat;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.SortedSet;
+
 
 public class Classs {
     public String name;
@@ -45,6 +50,7 @@ public class Classs {
 
     //private Ability[] abilities;TODO
     //private Feat[] feats;TODO
+    private Set<Feat> favFeats;
 
     /**
      * Array of ints that represent the Base Attack Bonus for a hero at a given level. For example, at
@@ -88,6 +94,7 @@ public class Classs {
         this.classSkills = cSkills;
         //this.abilities = abilities;TODO
         //this.feats = feats;TODO
+        this.favFeats = new HashSet<>();
         this.BAB = bab;
         this.fortSave = fort;
         this.refSave = ref;
@@ -172,7 +179,12 @@ public class Classs {
     }
     public int getCashDie() { return cashDie; }
 
+    public Set getFavFeats() { return favFeats; }
+    void addFavFeat(Feat f) {
+        this.favFeats.add(f);
+    }
+
     public void addClassSkill(int i) {
-        classSkills.add(new Integer(i));
+        classSkills.add(i);
     }
 }

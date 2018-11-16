@@ -1,6 +1,24 @@
 package com.bibfortuna.powerconverters.Classes;
 
 import com.bibfortuna.powerconverters.Attribute;
+import com.bibfortuna.powerconverters.Feats.Acrobatic;
+import com.bibfortuna.powerconverters.Feats.Alertness;
+import com.bibfortuna.powerconverters.Feats.AnimalAffinity;
+import com.bibfortuna.powerconverters.Feats.Attuned;
+import com.bibfortuna.powerconverters.Feats.Aware;
+import com.bibfortuna.powerconverters.Feats.BlindFight;
+import com.bibfortuna.powerconverters.Feats.BurstOfSpeed;
+import com.bibfortuna.powerconverters.Feats.Cautious;
+import com.bibfortuna.powerconverters.Feats.Compassion;
+import com.bibfortuna.powerconverters.Feats.DefensiveMartialArts;
+import com.bibfortuna.powerconverters.Feats.Dodge;
+import com.bibfortuna.powerconverters.Feats.ForceFlight;
+import com.bibfortuna.powerconverters.Feats.ForceMastery;
+import com.bibfortuna.powerconverters.Feats.ForceMind;
+import com.bibfortuna.powerconverters.Feats.ForceSpeed;
+import com.bibfortuna.powerconverters.Feats.HeroicSurge;
+import com.bibfortuna.powerconverters.Feats.ImprovedForceMind;
+import com.bibfortuna.powerconverters.Feats.ImprovedInitiative;
 
 import java.util.ArrayList;
 
@@ -54,5 +72,22 @@ public class ForceAdept extends Classs {
         addClassSkill(35);
         addClassSkill(36);
         addClassSkill(37);
+
+        addFavFeat(new Acrobatic());
+        addFavFeat(new Alertness());
+        addFavFeat(new AnimalAffinity());
+        addFavFeat(new Attuned());
+        addFavFeat(new Aware());
+        addFavFeat(new BlindFight());
+        addFavFeat(new BurstOfSpeed());
+        addFavFeat(new Cautious());
+        addFavFeat(new Compassion());
+        addFavFeat(new DefensiveMartialArts());
+        addFavFeat(new Dodge());
+        addFavFeat(new ForceMind());
+        addFavFeat(new HeroicSurge());
+        addFavFeat(new ImprovedForceMind());
+        addFavFeat(new ImprovedInitiative());
+        //TODO add all favorite feats
     }
 }

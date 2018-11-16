@@ -37,7 +37,7 @@ public class PlayerTest {
 //        yolo.printCombat();
 //        yolo.printFeats();
 
-        Player multi = new Player(new JediConsular(), 12, new Scoundrel(), 8, true, "feats");
+        Player multi = new Player(new TechSpecialist(), 10, new Scoundrel(), 2, true, "randomNewAttributes");
     }
 
     @Test

@@ -1,6 +1,5 @@
 package com.bibfortuna.powerconverters.Feats;
 
-import com.bibfortuna.powerconverters.Feats.Feat;
 
 public class ImprovedInitiative extends Feat {
     public ImprovedInitiative() {

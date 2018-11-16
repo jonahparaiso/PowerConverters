@@ -5,6 +5,7 @@ import com.bibfortuna.powerconverters.Classes.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.HashMap;
 
@@ -249,14 +250,14 @@ public class Player {
         this.CHA = cha;
 
         initializeForcePoints(c, lvl);
-        applySpeciesBonus(r, printing);
+        applySpeciesBonus(r, printingCheck(printType, "applySpeciesBonus"));
         refreshMods();
-        applyClasss(c, printing);
+        applyClasss(c, printingCheck(printType, "applyClasss"));
         levelUp(c, lvl, printing, printType);
         //testing all feats
         for (String key : featLibrary.keySet())
-            addFeat(key, printing);
-        initializeFeats(printing);
+            addFeat(key, printingCheck(printType, "addFeat"));
+        initializeFeats(printingCheck(printType, "initializeFeats"));
     }
 
     /**
@@ -408,7 +409,7 @@ public class Player {
         }
     }
 
-    //////////////////////////////////FOR RANDOM NPC GENERATION/////////////////////////////////////
+    ///////////////////////////////////// Name/Class/Race RNG //////////////////////////////////////
 
     /**
      * Helper method to randomly select a name based on gender. Perhaps it could be improved to make
@@ -516,156 +517,72 @@ public class Player {
     }
 
     /**
-     * Automatically replicates the attribute generation for a first level hero. Normally, the player
-     * will roll four d6 and take the sum of the three highest dice, this will range from 8 to 18
-     * typically. This process happens six times. To prevent utterly terrible heroes, this method takes
-     * the best six of seven of the process.
-     */
-    private void randomNewAttributes(Classs c, boolean printing) {
-        Dice die = new Dice();
-        int[] temp = new int[7];
-        for (int i = 0; i < temp.length; i++) {
-            temp[i] = die.bestOf(3, 4, 6);
-        }
-        Arrays.sort(temp);
-
-        //Depending on which stat is their favorite, give the appropriate (best or next best) roll to said attribute
-        switch (c.getFav1()) {
-            case STR:
-                this.STR = temp[6];
-                break;
-            case DEX:
-                this.DEX = temp[6];
-                break;
-            case CON:
-                this.CON = temp[6];
-                break;
-            case INT:
-                this.INT = temp[6];
-                break;
-            case WIS:
-                this.WIS = temp[6];
-                break;
-            case CHA:
-                this.CHA = temp[6];
-                break;
-        }
-
-        switch (c.getFav2()) {
-            case STR:
-                this.STR = temp[5];
-                break;
-            case DEX:
-                this.DEX = temp[5];
-                break;
-            case CON:
-                this.CON = temp[5];
-                break;
-            case INT:
-                this.INT = temp[5];
-                break;
-            case WIS:
-                this.WIS = temp[5];
-                break;
-            case CHA:
-                this.CHA = temp[5];
-                break;
-        }
-
-        switch (c.getFav3()) {
-            case STR:
-                this.STR = temp[4];
-                break;
-            case DEX:
-                this.DEX = temp[4];
-                break;
-            case CON:
-                this.CON = temp[4];
-                break;
-            case INT:
-                this.INT = temp[4];
-                break;
-            case WIS:
-                this.WIS = temp[4];
-                break;
-            case CHA:
-                this.CHA = temp[4];
-                break;
-        }
-
-        switch (c.getFav4()) {
-            case STR:
-                this.STR = temp[3];
-                break;
-            case DEX:
-                this.DEX = temp[3];
-                break;
-            case CON:
-                this.CON = temp[3];
-                break;
-            case INT:
-                this.INT = temp[3];
-                break;
-            case WIS:
-                this.WIS = temp[3];
-                break;
-            case CHA:
-                this.CHA = temp[3];
-                break;
-        }
-
-        switch (c.getFav5()) {
-            case STR:
-                this.STR = temp[2];
-                break;
-            case DEX:
-                this.DEX = temp[2];
-                break;
-            case CON:
-                this.CON = temp[2];
-                break;
-            case INT:
-                this.INT = temp[2];
-                break;
-            case WIS:
-                this.WIS = temp[2];
-                break;
-            case CHA:
-                this.CHA = temp[2];
-                break;
-        }
-
-        switch (c.getFav6()) {
-            case STR:
-                this.STR = temp[1];
-                break;
-            case DEX:
-                this.DEX = temp[1];
-                break;
-            case CON:
-                this.CON = temp[1];
-                break;
-            case INT:
-                this.INT = temp[1];
-                break;
-            case WIS:
-                this.WIS = temp[1];
-                break;
-            case CHA:
-                this.CHA = temp[1];
-                break;
-        }
-
-        if (printing)
-            System.out.printf("Starting stats for the new %s %s:%n%nSTR=%d%nDEX=%d%nCON=%d%nINT=%d%nWIS=%d%nCHA=%d%n%n", c.getName(), name, STR, DEX, CON, INT, WIS, CHA);
-    }
-
-    /**Generates an unbiased race. True random.
+     * Generates an unbiased race. True random.
      * @return The species randomly generated taken from the list of all species.
      */
     private Species randomRace() {
         int randomSpecies = die.roll(Species.values().length) - 1;
         return Species.values()[randomSpecies];
+    }
+
+    //////////////////////////////////////// Attribute RNG /////////////////////////////////////////
+
+    /**
+     * Automatically replicates the attribute generation for a first level hero. Normally, the player
+     * will roll four d6 and take the sum of the three highest dice. This will range from 7 to 18
+     * typically. This process happens six times. To prevent utterly terrible heroes, this method can
+     * easily remedy the poor luck by taking the best 6 of 7 rolls.
+     */
+    private void randomNewAttributes(Classs c, boolean printing) {
+        Dice die = new Dice();
+        Integer[] temp = new Integer[7];
+        for (int i = 0; i < temp.length; i++) {
+            temp[i] = die.bestOf(3, 4, 6);
+        }
+        Arrays.sort(temp, Collections.reverseOrder());
+
+        //Depending on which stat is their favorite, give the appropriate (best or next best) roll to said attribute
+        setStartingAttribute(0, temp, c.getFav1(), printing);
+        setStartingAttribute(1, temp, c.getFav2(), printing);
+        setStartingAttribute(2, temp, c.getFav3(), printing);
+        setStartingAttribute(3, temp, c.getFav4(), printing);
+        setStartingAttribute(4, temp, c.getFav5(), printing);
+        setStartingAttribute(5, temp, c.getFav6(), printing);
+
+        if (printing)
+            System.out.printf("Starting stats for the new %s %s:%n%nSTR=%d%nDEX=%d%nCON=%d%nINT=%d%nWIS=%d%nCHA=%d%n%n", c.getName(), name, STR, DEX, CON, INT, WIS, CHA);
+    }
+
+    /**
+     * Helper method to the randomNewAttributes method. Takes an index, an array, and an Attribute.
+     * Sets the appropriate Attribute to the corresponding value in the array
+     * @param i index of the target value in the passed in array
+     * @param temp a sorted array of starting attribute values, an example: {17, 16, 15, 14, 12, 9}
+     * @param fav the type of Attribute to initialize, example: Charisma, or CHA.
+     */
+    private void setStartingAttribute(int i, Integer[] temp, Attribute fav, boolean printing) {
+        switch (fav) {
+            case STR:
+                this.STR = temp[i];
+                break;
+            case DEX:
+                this.DEX = temp[i];
+                break;
+            case CON:
+                this.CON = temp[i];
+                break;
+            case INT:
+                this.INT = temp[i];
+                break;
+            case WIS:
+                this.WIS = temp[i];
+                break;
+            case CHA:
+                this.CHA = temp[i];
+                break;
+        }
+        if (printing)
+            System.out.printf("Set %s to %d%n", fav.name(), temp[i]);
     }
 
     /**
@@ -740,7 +657,7 @@ public class Player {
             if (attributePointsLeft == 0)
                 break;
 
-            /**If this is somehow reached, then the hero has fantastic starting stats, and it
+            /*If this is somehow reached, then the hero has fantastic starting stats, and it
              * means the stats are at least at 18, 16, 14, 14, 12, and 10. Now we can max out the best stat.
              * */
             attributePointsLeft = attributeToTarget(c.getFav1(), printing, 30);
@@ -896,18 +813,26 @@ public class Player {
         return 1;
     }
 
+    ////////////////////////////////////////// Skill RNG ///////////////////////////////////////////
+
     /**
-     * Method for a single class npc to spend skill points per level
+     * Allots a certain number of skill points to a hero based on their class and race. Humans get one
+     * additional skill point per level, they're OP. I mean just look at the franchise. Kit Fisto got wrecked
+     * while your boi Daddy Palpatine masterminded the whole galaxy.
+     *
+     * @param c The Classs determines how many skill points are allotted
+     * @param printing Used for debugging, prints data to the console if true
      */
-    private void lvlUpNewSkills(Classs c, int lvl, boolean printing) {
-        if (lvl == 1 && this.level == 1) {
+    private void lvlUpNewSkills(Classs c, boolean printing) {
+        //At first level, heroes start off with four times the amount they gain normally when leveling up
+        if (this.level == 1) {
             if (classes.get(c.name).getSkillUp() + iMod >= 1)
                 skillPointsToSpend += ((classes.get(c.name).getSkillUp() + iMod) * 4);
             else
-                skillPointsToSpend+=4;
+                skillPointsToSpend += 4;
             if (race == Species.HUMAN)
                 skillPointsToSpend += 4;
-            spendSkillPoints(c, lvl, printing);
+            spendSkillPoints(c, printing);
         } else {
             if (classes.get(c.name).getSkillUp() + iMod >= 1)
                 skillPointsToSpend += (classes.get(c.name).getSkillUp() + iMod);
@@ -915,7 +840,7 @@ public class Player {
                 skillPointsToSpend++;
             if (race == Species.HUMAN)
                 skillPointsToSpend++;
-            spendSkillPoints(c, lvl, printing);
+            spendSkillPoints(c, printing);
         }
     }
 
@@ -925,7 +850,7 @@ public class Player {
      *
      * @param c The class to level up.
      */
-    private void spendSkillPoints(Classs c, int lvl, boolean printing) {
+    private void spendSkillPoints(Classs c, boolean printing) {
         ArrayList<Integer> classSkills = c.getClassSkills();
         int max = level + 3;
         float crossMax = max / 2;
@@ -1043,7 +968,7 @@ public class Player {
         if (printing) System.out.printf("TotalRanks: %d%n", totalRanks);
     }
 
-    //////////////////////////////////Leveling Up METHODS///////////////////////////////////////////
+    /////////////////////////////////// Leveling Up RNG ////////////////////////////////////////////
 
     /**
      * Helper Method to level up a character one level. For example, for any given level up, you need
@@ -1075,7 +1000,7 @@ public class Player {
             if (printing && printType.contains("lvl"))
                 System.out.printf("%n%nLeveling up %s from %d to %d in the %s class%nTotal level: %d%n", name, c.classLvl, currentLvl, c.getName(), level);
             lvlUpAttributes(c, level, printingCheck(printType, "lvlUpAttributes"));
-            lvlUpNewSkills(c, currentLvl, printingCheck(printType, "lvlUpNewSkills"));
+            lvlUpNewSkills(c, printingCheck(printType, "lvlUpNewSkills"));
             refreshBaseValues(c, currentLvl, printingCheck(printType, "refreshBaseValues"));
             safe = level %2 != 0;//if level is odd, go safe, otherwise roll a die.
             lvlUpVitality(c, safe, printingCheck(printType, "lvlUpVitality"));
@@ -1089,6 +1014,11 @@ public class Player {
             classes.get(c.name).classLvlUp();
             updateExp(level, printingCheck(printType, "updateExp"));
             //TODO NEED TO DO FEATS AND ABILITIES/POWERS
+            //A hero gets a feat every three levels regardless of class
+            if (level%3 == 0 || level == 1) {
+                //Randomly grab one of their class's favorite feats.
+                System.out.println("TODO need to add a feat here");
+            }
 
             if (printingCheck(printType, "list")) {
                 System.out.printf("%nFinished leveling up %s to %d in the %s class%n%nTotal level: %d%n", name, currentLvl, c.getName(), level);
@@ -1169,7 +1099,15 @@ public class Player {
      */
     private int addSafeVitality(Classs c) { return this.level %2 != 0 ? c.getVitalityUp()/2 + 1 : c.getVitalityUp()/2; }
 
-    //////////////////////////////////YOCO: You only call once//////////////////////////////////////
+    /**
+     * Used while leveling up, this method works for both Force users and non users.
+     */
+    private void updateForcePoints() {
+        if (forceLevel > 0 || forcePoints < 4)
+            forcePoints++;
+    }
+
+    ////////////////////////////////// YOCO: You only call once ////////////////////////////////////
 
     /**
      * Applies all the bonuses from a given species to the hero. ONLY EVER CALLED ONCE AND ONLY ONCE
@@ -1240,7 +1178,34 @@ public class Player {
             System.out.printf("%nWound Points initialized. Die: %d CON Mod: %d Max VP: %d%n",c.getVitalityUp(), cMod, maxVP);
     }
 
-    ////////////////////////////////////////Refreshers//////////////////////////////////////////////
+    /**
+     * Starts a hero off with the appropriate amount of Force Points. Only Force users can have more
+     * than four Force points at a time.
+     *
+     * @param c   The Class of the hero
+     * @param lvl The starting lvl of the hero
+     */
+    private void initializeForcePoints(Classs c, int lvl) {
+        switch (c.getName()) {
+            case "ForceAdept":
+                forcePoints = lvl;
+                break;
+            case "JediConsular":
+                forcePoints = lvl;
+                break;
+            case "JediGuardian":
+                forcePoints = lvl;
+                break;
+            default:
+                if (lvl >= 5)
+                    forcePoints = 5;
+                else
+                    forcePoints = lvl;
+        }
+        darkSidePoints = 0;
+    }
+
+    /////////////////////////////////////// Refreshers /////////////////////////////////////////////
 
     /**
      * Helper methods to refresh specific stats, factoring in any miscellaneous bonuses
@@ -1289,7 +1254,7 @@ public class Player {
     }
 
     /**
-     * Applies all the modifiers in the skill arrays.
+     * Sets all the modifiers in the skill arrays.
      */
     private void applySkillMods() {
         for (Skill s : skills) {
@@ -1416,9 +1381,7 @@ public class Player {
     /**
      * Refreshes the initiative.
      */
-    private void refreshInitiative() {
-        initiative = dMod + dexTempMod + initiativeMiscBonus;
-    }
+    private void refreshInitiative() { initiative = dMod + dexTempMod + initiativeMiscBonus; }
 
     /**
      * Refreshes the combat fields.
@@ -1460,38 +1423,6 @@ public class Player {
         isChaBuffed = false;
 
         applySkillMods();
-    }
-
-    /**
-     * Starts a hero off with the appropriate amount of Force Points. Only Force users can have more
-     * than four Force points at a time.
-     *
-     * @param c   The Class of the hero
-     * @param lvl The starting lvl of the hero
-     */
-    private void initializeForcePoints(Classs c, int lvl) {
-        switch (c.getName()) {
-            case "ForceAdept":
-                forcePoints = lvl;
-                break;
-            case "JediConsular":
-                forcePoints = lvl;
-                break;
-            case "JediGuardian":
-                forcePoints = lvl;
-                break;
-            default:
-                if (lvl >= 5)
-                    forcePoints = 5;
-                else
-                    forcePoints = lvl;
-        }
-        darkSidePoints = 0;
-    }
-
-    private void updateForcePoints() {
-        if (forceLevel > 0 || forcePoints < 4)
-            forcePoints++;
     }
 
     /////////////////////////////////////////////FEATS//////////////////////////////////////////////
