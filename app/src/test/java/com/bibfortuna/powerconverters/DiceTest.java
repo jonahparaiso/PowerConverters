@@ -145,4 +145,10 @@ public class DiceTest {
         System.out.printf("%nFinished running testBestOfRange%nTotal minimum rolls: %d%n", lowRolls);
         System.out.printf("Total maximum rolls: %d%nVariance of all rolls (should be >1): %f%n%n", highRolls, variance);
     }
+
+    @Test
+    public void testSpecificRoll() {
+        Dice die = new Dice();
+        System.out.printf("Rolling three d4... %d%n%n", die.rollX(3,4));
+    }
 }

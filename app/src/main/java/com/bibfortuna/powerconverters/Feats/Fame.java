@@ -7,5 +7,6 @@ public class Fame extends Feat {
                 "   Special: You can’t select both the Fame feat and the Infamy feat. You’re either\n" +
                 "       famous or infamous, not both.");
         prereqs.put("INFAMOUS", 0);//A prereq with Integer value 0 means it CAN'T have this feat
+        boostMisc(3);
     }
 }

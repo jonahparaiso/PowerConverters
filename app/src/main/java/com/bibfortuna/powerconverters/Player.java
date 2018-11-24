@@ -1558,8 +1558,21 @@ public class Player {
                         //weaponRack(feats.get(key).getSpecialty()).increaseCritical(feats.get(key).getMiscBonus());
                         break;
                     case "IMPROVED INITIATIVE":
-                        initiativeMiscBonus += 4;
+                        initiativeMiscBonus += this.feats.get(key).getMiscBonus();
                         break;
+                    case "FAME":
+                        reputation += this.feats.get(key).getMiscBonus();
+                        break;
+                    case "INFAMY":
+                        reputation += this.feats.get(key).getMiscBonus();
+                        break;
+                    case "KNIGHT DEFENSE":
+                        dodgeBonus += this.feats.get(key).getMiscBonus();
+                        break;
+                    case "IRON WILL":
+                        willMiscMod += this.feats.get(key).getMiscBonus();
+                        break;
+
                 }
             if (printing)
                 System.out.printf("%s : %s%n", key, this.feats.get(key).getInfo());
