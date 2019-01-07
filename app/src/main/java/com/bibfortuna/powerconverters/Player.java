@@ -44,7 +44,7 @@ public class Player {
      * then his natural DEX modifier would be 3. Under the bonus, his temporary TOTAL mod would be
      * 8=5+3. To be clear, this does NOT make his Temp DEX score go up by 10 from 16 -> 26. TODO
      */
-    protected int STR;
+    protected int STR;//TODO check out RXJava and Observables/Observers
     private int sMod;
     private int strTempScore;
     private int strTempMod;
@@ -391,6 +391,8 @@ public class Player {
      */
     private boolean printingCheck(String printType, String functionName) {
         printType = printType.toUpperCase();
+        if(printType.equals("ALL"))
+            return true;
         functionName = functionName.toUpperCase();
         if (printType.contains("HELP") || printType.length() < 3 ) {
             System.out.println("Valid entries for printingCheck are:\n" +
@@ -1479,10 +1481,67 @@ public class Player {
         featLibrary.put("HEROIC SURGE", new HeroicSurge());
         featLibrary.put("HIGH FORCE MASTERY", new HighForceMastery());
         featLibrary.put("IMPROVED BANTHA RUSH", new ImprovedBanthaRush());
+        //Improved Critical takes specialty parameter in the form of a String and Weapon Expertise Feat
         featLibrary.put("IMPROVED CRITICAL", new ImprovedCritical("Not Set", new Feat("BLANK", "One empty boi.")));
         featLibrary.put("IMPROVED DISARM", new ImprovedDisarm());
         featLibrary.put("IMPROVED FORCE MIND", new ImprovedForceMind());
         featLibrary.put("IMPROVED INITIATIVE", new ImprovedInitiative());
+        featLibrary.put("IMPROVED MARTIAL ARTS", new ImprovedMartialArts());
+        featLibrary.put("IMPROVED TRIP", new ImprovedTrip());
+        featLibrary.put("IMPROVED TWO WEAPON FIGHTING", new ImprovedTwoWeaponFighting());
+        featLibrary.put("INFAMY", new Infamy());
+        featLibrary.put("INFLUENCE", new Influence());
+        featLibrary.put("IRON WILL", new IronWill());
+        featLibrary.put("KNIGHT DEFENSE", new KnightDefense());
+        featLibrary.put("KNIGHT MIND", new KnightMind());
+        featLibrary.put("KNIGHT SPEED", new KnightSpeed());
+        featLibrary.put("LIGHTNING REFLEXES", new LightningReflexes());
+        featLibrary.put("LIGHTSABER DEFENSE", new LightsaberDefense());
+        featLibrary.put("LINK", new Link());
+        featLibrary.put("LOW PROFILE", new LowProfile());
+        featLibrary.put("MALEVOLENT", new Malevolent());
+        featLibrary.put("MARTIAL ARTS", new MartialArts());
+        featLibrary.put("MASTER DEFENSE", new MasterDefense());
+        featLibrary.put("MASTER MIND", new MasterMind());
+        featLibrary.put("MASTER SPEED", new MasterSpeed());
+        featLibrary.put("METTLE", new Mettle());
+        featLibrary.put("MIMIC", new Mimic());
+        featLibrary.put("MIND TRICK", new MindTrick());
+        featLibrary.put("MOBILITY", new Mobility());
+        featLibrary.put("MULTISHOT", new Multishot());
+        featLibrary.put("NIMBLE", new Nimble());
+        featLibrary.put("PERSUASIVE", new Persuasive());
+        featLibrary.put("POINT BLANK SHOT", new PointBlankShot());
+        featLibrary.put("POWER ATTACK", new PowerAttack());
+        featLibrary.put("PRECISE SHOT", new PreciseShot());
+        featLibrary.put("QUICK DRAW", new QuickDraw());
+        featLibrary.put("QUICKNESS", new Quickness());
+        featLibrary.put("RAGE", new Rage());
+        featLibrary.put("RAPID SHOT", new RapidShot());
+        featLibrary.put("RUGGED", new Rugged());
+        featLibrary.put("RUN", new Run());
+        featLibrary.put("SHARP EYED", new SharpEyed());
+        featLibrary.put("SHOT ON THE RUN", new ShotOnTheRun());
+        featLibrary.put("SHILL EMPHASIS", new SkillEmphasis());
+        featLibrary.put("SPACER", new Spacer());
+        featLibrary.put("SPRING ATTACK", new SpringAttack());
+        featLibrary.put("STAMINA", new Stamina());
+        featLibrary.put("STARSHIP DODGE", new StarshipDodge());
+        featLibrary.put("STARSHIP OPERATION", new StarshipOperation());
+        featLibrary.put("STEADY", new Steady());
+        featLibrary.put("STEALTHY", new Steathly());
+        featLibrary.put("SUNDER", new Sunder());
+        featLibrary.put("SURGERY", new Surgery());
+        featLibrary.put("TOUGHNESS", new Toughness());
+        featLibrary.put("TRACK", new Track());
+        featLibrary.put("TRICK", new Trick());
+        featLibrary.put("TRUSTWORTHY", new Trustworthy());
+        featLibrary.put("TWO WEAPON FIGHTING", new TwoWeaponFighting());
+        featLibrary.put("WEAPON FINESSE", new WeaponFinesse());
+        featLibrary.put("WEAPON FOCUS", new WeaponFocus());
+        featLibrary.put("WEAPON GROUP PROFICIENCY", new WeaponGroupProficiency());
+        featLibrary.put("WHIRLWIND ATTACK", new WhirlwindAttack());
+        featLibrary.put("ZERO G TRAINING", new ZeroGTraining());
 
         if (printing)
             for (String key : featLibrary.keySet()) {
@@ -1503,6 +1562,7 @@ public class Player {
                 for (int i = 0; i < this.feats.get(key).getSkills().length; i++) {
                     //Loop through the array held by the Feat, inside there is information on which skills are boosted.
                     //Go through and add the bonuses to the corresponding misc bonus in the player skill array.
+                    //TODO Can be optimized. Doesnt need full array to hold values, can just be a stack/queue/list of pairs of values
                     if (printing && this.feats.get(key).getSkills()[i] > 0)
                         System.out.printf("Adding %d misc bonus to %s%n",feats.get(key).getSkills()[i], skills[i].getType().getName());
                     skills[i].addMiscMod(this.feats.get(key).getSkills()[i]);
@@ -1513,6 +1573,7 @@ public class Player {
                 for (int i = 0; i < this.feats.get(key).getForceSkills().length; i++) {
                     //Loop through the array held by the Feat, inside there is information on which skills are boosted.
                     //Go through and add the bonuses to the corresponding misc bonus in the player skill array.
+                    //TODO Can be optimized. Doesnt need full array to hold values, can just be a stack/queue/list of pairs of values
                     if (printing && this.feats.get(key).getForceSkills()[i] > 0)
                         System.out.printf("Adding %d misc bonus to %s%n",this.feats.get(key).getForceSkills()[i], forceSkills[i].getType().getName());
                     forceSkills[i].addMiscMod(this.feats.get(key).getForceSkills()[i]);
@@ -1572,7 +1633,18 @@ public class Player {
                     case "IRON WILL":
                         willMiscMod += this.feats.get(key).getMiscBonus();
                         break;
-
+                    case "LIGHTNING REFLEXES":
+                        reflexMiscMod += this.feats.get(key).getMiscBonus();
+                        break;
+                    case "LIGHTSABER DEFENSES":
+                        dodgeBonus += this.feats.get(key).getMiscBonus();
+                        break;
+                    case "LOW PROFILE":
+                        reputation += this.feats.get(key).getMiscBonus();
+                        break;
+                    case "MASTER DEFENSE":
+                        dodgeBonus += this.feats.get(key).getMiscBonus();
+                        break;
                 }
             if (printing)
                 System.out.printf("%s : %s%n", key, this.feats.get(key).getInfo());
@@ -1603,7 +1675,7 @@ public class Player {
             key = k.toString().toUpperCase();
             reqValue = map.get(k);
             //Determining if the prereq is a feat or an attribute, the below case means it's the latter
-            if (key.length() == 3 && !key.contains("Run")) {
+            if (key.length() == 3 && !key.equals("RUN")) {
                 switch (key) {
                     case "STR":
                         if (STR >= reqValue)
@@ -1751,7 +1823,7 @@ public class Player {
     /**
      * Prints out the list of Class skills for the Class object calling this method.
      */
-    private void printSkills() {
+    protected void printSkills() {
         System.out.printf("Skill Modifiers for %s are as such:%n", name);
         System.out.println("Skill Name---------------AtMod-Ranks-Misc-Total Skill Modifier");
         StringBuilder preBuff;
@@ -1786,7 +1858,7 @@ public class Player {
     /**
      * Print Attributes as they would appear on the character sheet
      */
-    private void printAttributes() {
+    protected void printAttributes() {
         String buffer = "";
         String modBuffer = " ";
         System.out.printf("%s's%n     Attributes-Modifier-TempScore-TempMod%n", name);
@@ -1840,7 +1912,7 @@ public class Player {
     /**
      * Prints out the saving throws.
      */
-    private void printSavingThrows() {
+    protected void printSavingThrows() {
         String buffer = " ";
         String modBuffer = " ";
         String baseBuff = " ";
@@ -1865,7 +1937,7 @@ public class Player {
         System.out.printf("WILL            %d%s = %d%s  + %d%s  + %d%n", will, buffer, baseWill, baseBuff, wMod, modBuffer, willMiscMod);
     }
 
-    private void printMisc() {
+    protected void printMisc() {
         StringBuilder listOfClasses = new StringBuilder();
         for (String key : classes.keySet())
             listOfClasses.append(String.format(key + " %d ", classes.get(key).classLvl));
@@ -1878,11 +1950,11 @@ public class Player {
                             "SPECIES    = %s%n", listOfClasses.toString(), exp, credits, level, forceLevel, gender, race.name());
     }
 
-    private void printHealth() {
+    protected void printHealth() {
         System.out.printf("%nMAX VITALITY = %d%nCURRENT VP   = %d%nWOUND POINTS = %d%n", maxVP, currentVP, currentWP);
     }
 
-    private void printCombat() {
+    protected void printCombat() {
         String mTotalBuff, baseBuff, strBuff, sizeBuff, rTotalBuff, dexBuff;
         if (melee < 10 && melee >= 0) mTotalBuff = " ";
         else mTotalBuff = "";
@@ -1911,7 +1983,7 @@ public class Player {
         System.out.printf("%d%s                 = %d%s     + %d%n",initiative, baseBuff, dMod, dexBuff, initiativeMiscBonus);
     }
 
-    private void printFeats() {
+    protected void printFeats() {
         System.out.printf("FEATS at lvl %d%n",this.level);
         for (String key : this.feats.keySet()) {
             if (this.feats.get(key).getSpecialty().length() != 0)
