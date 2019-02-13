@@ -1557,6 +1557,9 @@ public class Player {
      */
     private void initializeFeats(boolean printing) {
         for (String key : this.feats.keySet()) {
+            //if the feat has already been initialized, then continue to the next feat
+            if (this.feats.get(key).isInitialized())
+                continue;
             //check to see if the feat boosts skills
             if (this.feats.get(key).areSkillsBoosted()) {
                 for (int i = 0; i < this.feats.get(key).getSkills().length; i++) {
@@ -1645,7 +1648,13 @@ public class Player {
                     case "MASTER DEFENSE":
                         dodgeBonus += this.feats.get(key).getMiscBonus();
                         break;
+                    case "QUICKNESS":
+                        maxVP += this.feats.get(key).getMiscBonus();
+                        break;
                 }
+
+                this.feats.get(key).initialize();
+
             if (printing)
                 System.out.printf("%s : %s%n", key, this.feats.get(key).getInfo());
         }
