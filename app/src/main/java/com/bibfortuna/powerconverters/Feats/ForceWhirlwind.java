@@ -22,9 +22,10 @@ public class ForceWhirlwind extends Feat {
         prereqs.put("FORCE SENSITIVE", 1);
         prereqs.put("INT", 13);
         prereqs.put("56", 5);
-        prereqs.put("FORCE LEVEL", 6);
+        prereqs.put("FLV", 6);
         setActionType("Full round");
         setCanTake10(true);
+        setIsActivatedAbility(true);
 
         table = new CheckTable(20,"Fail. Try improving ranks and taking ten.",
                 "All targets within the whirlwind take a –4 penalty on all attack rolls, skill checks,\n" +

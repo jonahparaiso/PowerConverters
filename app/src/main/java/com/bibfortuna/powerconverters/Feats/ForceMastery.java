@@ -10,7 +10,8 @@ public class ForceMastery extends Feat {
                 "   Special: This feat is not cumulative with the effects of High Force Mastery. That is, you\n" +
                 "       cannot use both feats to reduce a full-round action to a free action.");
         prereqs.put("FORCE SENSITIVE", 1);
-        prereqs.put("FORCE LEVEL", 7);
+        prereqs.put("FLV", 7);
         prereqs.put("WIS", 15);
+        setIsActivatedAbility(true);
     }
 }

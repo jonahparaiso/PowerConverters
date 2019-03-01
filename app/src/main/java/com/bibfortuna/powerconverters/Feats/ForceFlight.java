@@ -15,8 +15,9 @@ public class ForceFlight extends Feat {
         prereqs.put("FORCE SENSITIVE", 1);
         //Move Object is forceSkills[17], which is 18 units above the first skill tree or 38, so index is the sum of the two
         prereqs.put("56", 6);
-        prereqs.put("FORCE LEVEL", 7);
+        prereqs.put("FLV", 7);
         setCanTake10(true);
+        setIsActivatedAbility(true);
 
         this.table = new CheckTable(20, 25,
                 "Distance: 10 meters", "Distance: 15 meters", "Distance: 20 meters",

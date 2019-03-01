@@ -11,5 +11,6 @@ public class ImprovedTrip extends Feat {
                 "Normal: See the normal trip rules in Combat.");
         prereqs.put("COMBAT EXPERTISE", 1);
         prereqs.put("INT", 1);
+        setIsActivatedAbility(true);
     }
 }

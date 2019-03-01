@@ -12,6 +12,6 @@ public class HighForceMastery extends Feat {
         prereqs.put("WIS", 17);
         prereqs.put("FORCE SENSITIVE", 1);
         prereqs.put("FORCE MASTERY", 1);
-        prereqs.put("FORCE LEVEL", 11);
+        prereqs.put("FLV", 11);
     }
 }

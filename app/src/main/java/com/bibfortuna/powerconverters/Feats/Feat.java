@@ -16,6 +16,7 @@ public class Feat {
 
     private final String name;
     private final String info;
+    private boolean isActivatedAbility;
     private String actionType;
     private String specialty;
     protected CheckTable table;
@@ -28,17 +29,19 @@ public class Feat {
     private boolean fSkillsAreBoosted;
     private boolean canTake10;
     private int simpleVitalityCost;
+    private boolean initialized;
 
     public Feat(String name, String info) {
         this.name = name;
         this.info = info;
+        this.isActivatedAbility = false;
         this.miscBonus = 0;
         this.skillsAreBoosted = false;
         this.fSkillsAreBoosted = false;
         this.prereqs = new HashMap<>();
         this.actionType = "";
         this.specialty = "";
-
+        this.initialized = false;
     }
 
     //////////////////////////////////////////GETTERS///////////////////////////////////////////////
@@ -51,6 +54,7 @@ public class Feat {
     public String getInfo() {
         return info;
     }
+    public boolean isActivatedAbility() { return isActivatedAbility; }
     public String getType() { return actionType; }
     public String getSpecialty() { return specialty; }
     public String checkTable(int roll) { return table.makeCheck(roll); }
@@ -64,18 +68,18 @@ public class Feat {
     public boolean areFSkillsBoosted() { return  fSkillsAreBoosted; }
     public boolean getCanTake10() { return canTake10; }
     public int getSimpleVitalityCost() { return simpleVitalityCost; }
+    public boolean isInitialized() { return initialized; }
 
     //////////////////////////////////////////SETTERS///////////////////////////////////////////////
 
     protected void boostSkill(int index, int boost, boolean isForce) {
-        skillsBoosted = new int[39];
-        fSkillsBoosted = new int[20];
-
         if (!isForce) {
+            skillsBoosted = new int[39];
             skillsBoosted[index] = boost;
             skillsAreBoosted = true;
         }
         else {
+            fSkillsBoosted = new int[20];
             fSkillsBoosted[index] = boost;
             fSkillsAreBoosted = true;
         }
@@ -84,6 +88,8 @@ public class Feat {
     protected void boostMisc(int bonus) {
         miscBonus = bonus;
     }
+
+    protected void setIsActivatedAbility(boolean isAbil) {this.isActivatedAbility = isAbil;}
 
     protected void setActionType(String t) {
         actionType = t;
@@ -94,4 +100,6 @@ public class Feat {
     public void setCanTake10(boolean canTake10) { this.canTake10 = canTake10; }
 
     public void setSpecialty(String specialty) { this.specialty = specialty; }
+
+    public void initialize() { this.initialized = true; }
 }

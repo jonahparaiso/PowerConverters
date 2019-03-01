@@ -11,8 +11,9 @@ public class ImprovedForceMind extends Feat {
                 "       The individual using Improved Force Mind may not be one of the targets.");
         prereqs.put("WIS", 15);
         prereqs.put("FORCE SENSITIVE", 1);
-        prereqs.put("FORCE LEVEL", 5);
+        prereqs.put("FLV", 5);
         prereqs.put("SENSE", 1);
         setSimpleVitalityCost(8);
+        setIsActivatedAbility(true);
     }
 }

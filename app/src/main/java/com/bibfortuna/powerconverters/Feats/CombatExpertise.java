@@ -13,5 +13,6 @@ public class CombatExpertise extends Feat {
                 "       while using the attack or full attack action to take a –4 penalty on attacks and gain\n" +
                 "       a +2 dodge bonus to Defense.");
         prereqs.put("INT", 13);
+        setIsActivatedAbility(true);
     }
 }

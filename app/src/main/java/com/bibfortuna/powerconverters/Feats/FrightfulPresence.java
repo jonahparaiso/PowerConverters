@@ -17,5 +17,6 @@ public class FrightfulPresence extends Feat {
         prereqs.put("CHA", 15);
         prereqs.put("20", 9);
         setActionType("Free action");
+        setIsActivatedAbility(true);
     }
 }

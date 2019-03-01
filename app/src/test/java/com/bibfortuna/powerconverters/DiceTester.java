@@ -55,5 +55,8 @@ public class DiceTester {
         System.out.printf("Testing bestOf(3,4,6) ten times. Results:%na : %d%nb : %d%nc : %d%nd : %d%n" +
                         "e : %d%nf : %d%n g : %d%n h : %d%n i : %d%n j : %d%n k : %d%nmean : %d%n%n",
                 a, b, c, d, e, f, g, h, i, j, k, mean);
+
+        a = dieTester.die.roll(11);
+        System.out.println(a);
     }
 }

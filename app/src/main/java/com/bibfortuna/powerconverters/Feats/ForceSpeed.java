@@ -12,8 +12,9 @@ public class ForceSpeed extends Feat {
                 "       additional attack at your highest attack bonus when using the full attack action.");
         prereqs.put("BURST OF SPEED", 1);
         prereqs.put("CONTROL", 1);
-        prereqs.put("FORCE LEVEL", 7);
+        prereqs.put("FLV", 7);
         setActionType("Free action");
         setSimpleVitalityCost(8);
+        setIsActivatedAbility(true);
     }
 }

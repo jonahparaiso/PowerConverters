@@ -51,11 +51,11 @@ public enum Skilltype {
     ENHANCESENSES(Attribute.WIS, 5, "Enhance Senses"),//44
     FARSEEING(Attribute.WIS, 6, "Farseeing"),//45
     FEAR(Attribute.WIS, 7, "Fear"),//46
-    FDEFENSE(Attribute.CHA, 8, "Force Defence"),//47
-    FGRIP(Attribute.INT, 9, "Force Grip"),//48
-    FLIGHTNING(Attribute.INT, 10, "Force Lightning"),//49
-    FSTEALTH(Attribute.CHA, 11, "Force Stealth"),//50
-    FSTRIKE(Attribute.INT, 12, "Force Strike"),//51
+    FORCEDEFENSE(Attribute.CHA, 8, "Force Defence"),//47
+    FORCEGRIP(Attribute.INT, 9, "Force Grip"),//48
+    FORCELIGHTNING(Attribute.INT, 10, "Force Lightning"),//49
+    FORCESTEALTH(Attribute.CHA, 11, "Force Stealth"),//50
+    FORCESTRIKE(Attribute.INT, 12, "Force Strike"),//51
     FREINDSHIP(Attribute.CHA, 13, "Friendship"),//52
     HEALANOTHER(Attribute.WIS, 14, "Heal Another"),//53
     HEALSELF(Attribute.CHA, 15, "Heal Self"),//54

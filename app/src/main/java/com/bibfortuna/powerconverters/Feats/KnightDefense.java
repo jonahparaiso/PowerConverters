@@ -14,7 +14,7 @@ public class KnightDefense extends Feat {
         prereqs.put("CONTROL", 1);
         prereqs.put("LIGHTSABER DEFENSE", 1);
         prereqs.put("EXOTIC WEAPON PROFICIENCY", 1);
-        prereqs.put("FORCE LEVEL", 7);
+        prereqs.put("FLV", 7);
 
         boostMisc(2);
     }

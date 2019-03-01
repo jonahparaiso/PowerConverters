@@ -13,5 +13,6 @@ public class CombatReflexes extends Feat {
                 "       With this feat, you may also make attacks of opportunity while flat-footed.\n" +
                 "   Normal: A character without the Combat Reflexes feat can make only one attack of opportunity" +
                 "       per round and can’t make attacks of opportunity while flat-footed.");
+        setIsActivatedAbility(true);
     }
 }

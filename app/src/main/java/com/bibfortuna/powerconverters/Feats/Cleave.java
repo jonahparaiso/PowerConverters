@@ -11,5 +11,6 @@ public class Cleave extends Feat {
                 "       opponent. You can use this ability once per round.");
         prereqs.put("POWER ATTACK", 1);
         prereqs.put("STR", 13);
+        setIsActivatedAbility(true);
     }
 }

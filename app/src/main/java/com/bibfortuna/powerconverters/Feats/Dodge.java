@@ -7,5 +7,6 @@ public class Dodge extends Feat {
                 "   Benefit: +1 dodge bonus to defense against one chosen target");
         prereqs.put("DEX", 13);
         boostMisc(1);
+        setIsActivatedAbility(true);
     }
 }

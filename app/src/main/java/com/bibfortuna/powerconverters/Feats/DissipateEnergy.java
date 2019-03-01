@@ -11,10 +11,11 @@ public class DissipateEnergy extends Feat {
                 "       you don’t take any damage and you gain 1 vitality point for every 2 points of wound damage you\n" +
                 "       would have taken (but you can’t gain vitality points in excess of your full normal total). If\n" +
                 "       the saving throw fails, you take the full damage.\n" +
-                "   Dissipate Energy is used as a reaction, and cost no vitality points.");
+                "   Dissipate Energy is used as a reaction, and costs no vitality points.");
         prereqs.put("CONTROL", 1);
         prereqs.put("FORCE SENSITIVE", 1);
-        prereqs.put("FORCE LEVEL", 4);
+        prereqs.put("FLV", 4);
         setActionType("Reaction");
+        setIsActivatedAbility(true);
     }
 }

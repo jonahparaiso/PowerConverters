@@ -1517,31 +1517,31 @@ public class Player {
         featLibrary.put("QUICK DRAW", new QuickDraw());
         featLibrary.put("QUICKNESS", new Quickness());
         featLibrary.put("RAGE", new Rage());
-        featLibrary.put("RAPID SHOT", new RapidShot());
-        featLibrary.put("RUGGED", new Rugged());
-        featLibrary.put("RUN", new Run());
-        featLibrary.put("SHARP EYED", new SharpEyed());
-        featLibrary.put("SHOT ON THE RUN", new ShotOnTheRun());
-        featLibrary.put("SHILL EMPHASIS", new SkillEmphasis());
-        featLibrary.put("SPACER", new Spacer());
-        featLibrary.put("SPRING ATTACK", new SpringAttack());
-        featLibrary.put("STAMINA", new Stamina());
-        featLibrary.put("STARSHIP DODGE", new StarshipDodge());
-        featLibrary.put("STARSHIP OPERATION", new StarshipOperation());
-        featLibrary.put("STEADY", new Steady());
-        featLibrary.put("STEALTHY", new Steathly());
-        featLibrary.put("SUNDER", new Sunder());
-        featLibrary.put("SURGERY", new Surgery());
-        featLibrary.put("TOUGHNESS", new Toughness());
-        featLibrary.put("TRACK", new Track());
-        featLibrary.put("TRICK", new Trick());
-        featLibrary.put("TRUSTWORTHY", new Trustworthy());
-        featLibrary.put("TWO WEAPON FIGHTING", new TwoWeaponFighting());
-        featLibrary.put("WEAPON FINESSE", new WeaponFinesse());
-        featLibrary.put("WEAPON FOCUS", new WeaponFocus());
-        featLibrary.put("WEAPON GROUP PROFICIENCY", new WeaponGroupProficiency());
-        featLibrary.put("WHIRLWIND ATTACK", new WhirlwindAttack());
-        featLibrary.put("ZERO G TRAINING", new ZeroGTraining());
+//        featLibrary.put("RAPID SHOT", new RapidShot());
+//        featLibrary.put("RUGGED", new Rugged());
+//        featLibrary.put("RUN", new Run());
+//        featLibrary.put("SHARP EYED", new SharpEyed());
+//        featLibrary.put("SHOT ON THE RUN", new ShotOnTheRun());
+//        featLibrary.put("SHILL EMPHASIS", new SkillEmphasis());
+//        featLibrary.put("SPACER", new Spacer());
+//        featLibrary.put("SPRING ATTACK", new SpringAttack());
+//        featLibrary.put("STAMINA", new Stamina());
+//        featLibrary.put("STARSHIP DODGE", new StarshipDodge());
+//        featLibrary.put("STARSHIP OPERATION", new StarshipOperation());
+//        featLibrary.put("STEADY", new Steady());
+//        featLibrary.put("STEALTHY", new Steathly());
+//        featLibrary.put("SUNDER", new Sunder());
+//        featLibrary.put("SURGERY", new Surgery());
+//        featLibrary.put("TOUGHNESS", new Toughness());
+//        featLibrary.put("TRACK", new Track());
+//        featLibrary.put("TRICK", new Trick());
+//        featLibrary.put("TRUSTWORTHY", new Trustworthy());
+//        featLibrary.put("TWO WEAPON FIGHTING", new TwoWeaponFighting());
+//        featLibrary.put("WEAPON FINESSE", new WeaponFinesse());
+//        featLibrary.put("WEAPON FOCUS", new WeaponFocus());
+//        featLibrary.put("WEAPON GROUP PROFICIENCY", new WeaponGroupProficiency());
+//        featLibrary.put("WHIRLWIND ATTACK", new WhirlwindAttack());
+//        featLibrary.put("ZERO G TRAINING", new ZeroGTraining());
 
         if (printing)
             for (String key : featLibrary.keySet()) {
@@ -1744,8 +1744,25 @@ public class Player {
                         if (bab >= reqValue)
                             out = true;
                         else {
-                            requirements.append("   Insufficient ").append(key).append(". Required: ").append(reqValue).append(" Has ").append(bab).append("\n");
+                            requirements.append("   Insufficient base attack bonus. Required: ").append(reqValue).append(" Has ").append(bab).append("\n");
                             out = false;
+                        }
+                        break;
+                    case "DSP":
+                        if (darkSidePoints >= reqValue)
+                            out = true;
+                        else {
+                            requirements.append("   Insufficient dark side points. Required: ").append(reqValue).append(" Has ").append(darkSidePoints).append("\n");
+                            out = false;
+                        }
+                        break;
+                    case "FLV":
+                        if (forceLevel >= reqValue) {
+                            out = true;
+                        }
+                        else {
+                            out = false;
+                            requirements.append("   Insufficient force level. Required: ").append(reqValue).append(" Has: ").append(forceLevel).append("\n");
                         }
                         break;
                 }
@@ -1776,19 +1793,8 @@ public class Player {
                 }
             }
             //If this is reached, it means that the String was longer than 3 char, isn't a skill,
-            //and is therefore a Feat, so check to see if the feat exists in this objects' feat map.
+            //and is therefore a Feat, so check to see if the prereq feat exists in this objects' feat map.
             catch (NumberFormatException e) {
-                if (key.startsWith("FORCE LEVEL")) {
-                    if (forceLevel >= reqValue) {
-                        out = true;
-                        continue;
-                    }
-                    else {
-                        out = false;
-                        requirements.append("   Insufficient force level. Required: ").append(reqValue).append(" Has: ").append(forceLevel).append("\n");
-                        continue;
-                    }
-                }
                 if (((this.feats.containsKey(key)) && (map.get(key) == 1)) || ((!this.feats.containsKey(key)) && (map.get(key) == 0))) {
                     out = true;
                 }
