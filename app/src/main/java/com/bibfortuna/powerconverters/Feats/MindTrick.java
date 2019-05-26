@@ -9,7 +9,7 @@ public class MindTrick extends Feat {
         prereqs.put("ALTER", 1);
         prereqs.put("FORCE SENSITIVE", 1);
 
-        boostSkill(0,2,true);
-        boostSkill(16,2,true);
+        boostSkill("Affect Mind",2);
+        boostSkill("Illusion",2);
     }
 }

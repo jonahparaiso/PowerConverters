@@ -5,6 +5,6 @@ public class Headstrong extends Feat {
         super("HEADSTRONG", "You are obstinate and unwilling to yield.\n" +
                 "   Benefit: You are a +1 synergy bonus on all Will saving throws and a +2 synergy bonus on all Intimidate checks.");
         boostMisc(1);
-        boostSkill(20, 2, false);
+        boostSkill("Intimidate", 2);
     }
 }

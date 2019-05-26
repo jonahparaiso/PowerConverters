@@ -8,7 +8,7 @@ public class Focus extends Feat {
         prereqs.put("FORCE SENSITIVE", 1);
         prereqs.put("ALTER", 1);
         prereqs.put("CONTROL", 1);
-        boostSkill(11, 2, true);
-        boostSkill(12, 2, true);
+        boostSkill("Force Stealth", 2);
+        boostSkill("Force Strike", 2);
     }
 }

@@ -10,7 +10,7 @@ public class Mettle extends Feat {
         prereqs.put("CONTROL",1);
         prereqs.put("FORCE SENSITIVE", 1);
 
-        boostSkill(1,2,true);
-        boostSkill(8,2,true);
+        boostSkill("Battlemind",2);
+        boostSkill("Force Defence",2);
     }
 }

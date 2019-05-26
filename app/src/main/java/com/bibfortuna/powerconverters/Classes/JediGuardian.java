@@ -27,7 +27,7 @@ public class JediGuardian extends Classs {
      */
     public JediGuardian() {
         super("JediGuardian",
-                Attribute.STR, Attribute.CON, Attribute.WIS, Attribute.INT, Attribute.CHA, Attribute.DEX,
+                Attribute.STR, Attribute.CON, Attribute.WIS, Attribute.INT, Attribute.DEX, Attribute.CHA,
                 10, 4,
                 new ArrayList<Integer>(),//Class Skills
                 new int[] {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20},//BAB

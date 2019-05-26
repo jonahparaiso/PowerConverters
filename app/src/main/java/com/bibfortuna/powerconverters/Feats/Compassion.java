@@ -6,8 +6,8 @@ public class Compassion extends Feat {
                 "   to them through the Force.\n" +
                 "   Prerequisite: Force Sensitive, Alter.\n" +
                 "   Benefit: +2 to Empathy and Heal Another.");
-        boostSkill(3, 2, true);
-        boostSkill(14, 2, true);
+        boostSkill("Empathy", 2);
+        boostSkill("Heal Another", 2);
         prereqs.put("FORCE SENSITIVE", 1);
         prereqs.put("ALTER", 1);
     }

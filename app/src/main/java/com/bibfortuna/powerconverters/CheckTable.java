@@ -5,6 +5,12 @@ public class CheckTable {
     private String[] result;
     private int[] vpCost;
 
+    public CheckTable(int[] dcArr, String[] resultArr, int[] vpArr) {
+        dc = dcArr;
+        result = resultArr;
+        vpCost = vpArr;
+    }
+
     /**
      * Creates a table of DCs versus results. For an example of a chart, see below:
      *
@@ -46,6 +52,14 @@ public class CheckTable {
         dc = new int[]{dc0, 999};
         result = new String[]{r0, r1};
         vpCost = new int[]{cost0, cost1};
+    }
+
+    public CheckTable(int dc0, int dc1, int dc2, int dc3, int dc4, int dc5, int dc6,
+                      String r0, String r1, String r2, String r3, String r4, String r5, String r6, String r7,
+                      int cost0, int cost1, int cost2, int cost3, int cost4, int cost5, int cost6, int cost7) {
+        dc = new int[]{dc0, dc1, dc2, dc3, dc4, dc5, dc6, 999};
+        result = new String[]{r0, r1, r2, r3, r4, r5, r6, r7};
+        vpCost = new int[]{cost0, cost1, cost2, cost3, cost4, cost5, cost6, cost7};
     }
 
     /**

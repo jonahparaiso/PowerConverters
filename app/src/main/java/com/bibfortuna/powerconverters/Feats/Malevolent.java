@@ -9,7 +9,7 @@ public class Malevolent extends Feat {
         prereqs.put("FORCE SENSITIVE", 1);
         prereqs.put("SENSE", 1);
 
-        boostSkill(7, 2, true);
-        boostSkill(9, 2, true);
+        boostSkill("Fear", 2);
+        boostSkill("Force Grip", 2);
     }
 }

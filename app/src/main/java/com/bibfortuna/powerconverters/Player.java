@@ -1200,7 +1200,7 @@ public class Player {
                 break;
             default:
                 if (lvl >= 5)
-                    forcePoints = 5;
+                    forcePoints = 4;
                 else
                     forcePoints = lvl;
         }
@@ -1517,24 +1517,24 @@ public class Player {
         featLibrary.put("QUICK DRAW", new QuickDraw());
         featLibrary.put("QUICKNESS", new Quickness());
         featLibrary.put("RAGE", new Rage());
-//        featLibrary.put("RAPID SHOT", new RapidShot());
-//        featLibrary.put("RUGGED", new Rugged());
-//        featLibrary.put("RUN", new Run());
-//        featLibrary.put("SHARP EYED", new SharpEyed());
-//        featLibrary.put("SHOT ON THE RUN", new ShotOnTheRun());
-//        featLibrary.put("SHILL EMPHASIS", new SkillEmphasis());
-//        featLibrary.put("SPACER", new Spacer());
-//        featLibrary.put("SPRING ATTACK", new SpringAttack());
-//        featLibrary.put("STAMINA", new Stamina());
-//        featLibrary.put("STARSHIP DODGE", new StarshipDodge());
-//        featLibrary.put("STARSHIP OPERATION", new StarshipOperation());
-//        featLibrary.put("STEADY", new Steady());
-//        featLibrary.put("STEALTHY", new Steathly());
-//        featLibrary.put("SUNDER", new Sunder());
-//        featLibrary.put("SURGERY", new Surgery());
-//        featLibrary.put("TOUGHNESS", new Toughness());
-//        featLibrary.put("TRACK", new Track());
-//        featLibrary.put("TRICK", new Trick());
+        featLibrary.put("RAPID SHOT", new RapidShot());
+        featLibrary.put("RUGGED", new Rugged());
+        featLibrary.put("RUN", new Run());
+        featLibrary.put("SHARP EYED", new SharpEyed());
+        featLibrary.put("SHOT ON THE RUN", new ShotOnTheRun());
+        featLibrary.put("SHILL EMPHASIS", new SkillEmphasis(0, false));
+        featLibrary.put("SPACER", new Spacer());
+        featLibrary.put("SPRING ATTACK", new SpringAttack());
+        featLibrary.put("STAMINA", new Stamina());
+        featLibrary.put("STARSHIP DODGE", new StarshipDodge(1));
+        featLibrary.put("STARSHIP OPERATION", new StarshipOperation(1));
+        featLibrary.put("STEADY", new Steady());
+        featLibrary.put("STEALTHY", new Stealthy());
+        featLibrary.put("SUNDER", new Sunder());
+        featLibrary.put("SURGERY", new Surgery());
+        featLibrary.put("TOUGHNESS", new Toughness());
+        featLibrary.put("TRACK", new Track());
+        featLibrary.put("TRICK", new Trick());
 //        featLibrary.put("TRUSTWORTHY", new Trustworthy());
 //        featLibrary.put("TWO WEAPON FIGHTING", new TwoWeaponFighting());
 //        featLibrary.put("WEAPON FINESSE", new WeaponFinesse());
@@ -1651,6 +1651,13 @@ public class Player {
                     case "QUICKNESS":
                         maxVP += this.feats.get(key).getMiscBonus();
                         break;
+                    case "RUGGED":
+                        fortitudeMiscMod += this.feats.get(key).getMiscBonus();
+                        break;
+                    case "TOUGHNESS":
+                        maxWP += this.feats.get(key).getMiscBonus();
+                        break;
+
                 }
 
                 this.feats.get(key).initialize();

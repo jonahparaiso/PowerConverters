@@ -9,7 +9,7 @@ public class Link extends Feat {
         prereqs.put("FORCE SENSITIVE", 1);
         prereqs.put("SENSE", 1);
 
-        boostSkill(6, 2, true);
-        boostSkill(19, 2, true);
+        boostSkill("Farseeing", 2);
+        boostSkill("Telepathy", 2);
     }
 }

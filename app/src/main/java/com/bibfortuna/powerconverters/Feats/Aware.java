@@ -5,8 +5,8 @@ public class Aware extends Feat {
         super("AWARE", "You are in harmony with your surroundings through your connection to the Force.\n" +
                     "   Prerequisite: Force Sensitive, Sense.\n" +
                     "   Benefit: +2 to Enhance Senses and See Force.\n");
-    boostSkill(4, 2, true);
-    boostSkill(18, 2, true);
+    boostSkill("Enhance Senses", 2);
+    boostSkill("See Force", 2);
     prereqs.put("FORCE SENSITIVE", 1);
     prereqs.put("SENSE", 1);
     }
