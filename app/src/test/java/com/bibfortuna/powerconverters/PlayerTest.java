@@ -29,13 +29,13 @@ public class PlayerTest {
 //        yolo.printCombat();
 //        yolo.printFeats();
 
-        //Player multi = new Player(new TechSpecialist(), 10, new Scoundrel(), 2, true, "list");
+//        Player multi = new Player(new TechSpecialist(), 10, new Scoundrel(), 2, true, "list");
     }
 
-    @Test
-    public void printConstructor3() {
-        System.out.println("Testing printConstructor3");
-        Player test = new Player(Species.BOTHAN, new Noble(), 1, true, "list");
+//    @Test
+//    public void printConstructor3() {
+//        System.out.println("Testing printConstructor3");
+        Player test = new Player(Species.WOOKIEE, new JediGuardian(), 20, true, "list");
         //Player test = new Player();
-    }
+//    }
 }

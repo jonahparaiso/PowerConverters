@@ -137,8 +137,8 @@ public class Player {
     private int darkSidePoints;
 
     //Arrays of skills, 39 regular skills and 20 force skills
-    protected Skill[] skills;
-    private Skill[] forceSkills;
+    public Skill[] skills;
+    public Skill[] forceSkills;
     private int skillPointsToSpend;
     private int totalRanks;
 
@@ -158,7 +158,7 @@ public class Player {
     /**
      * The most random character constructor.
      */
-    Player() {
+    public Player() {
         this.die = new Dice();
         int lvl = die.roll(20);
         boolean printing = die.roll(3) > 1;
@@ -189,9 +189,9 @@ public class Player {
         levelUp(c, lvl, printing, "LIST");
 
         //testing all feats
-        for (String key : featLibrary.keySet())
-            addFeat(key, printing);
-        initializeFeats(printing);
+//        for (String key : featLibrary.keySet())
+//            addFeat(key, printing);
+//        initializeFeats(printing);
 
         if (printing) {
             printSkills();
@@ -255,9 +255,9 @@ public class Player {
         applyClasss(c, printingCheck(printType, "applyClasss"));
         levelUp(c, lvl, printing, printType);
         //testing all feats
-        for (String key : featLibrary.keySet())
-            addFeat(key, printingCheck(printType, "addFeat"));
-        initializeFeats(printingCheck(printType, "initializeFeats"));
+//        for (String key : featLibrary.keySet())
+//            addFeat(key, printingCheck(printType, "addFeat"));
+//        initializeFeats(printingCheck(printType, "initializeFeats"));
     }
 
     /**
@@ -308,9 +308,9 @@ public class Player {
         levelUp(c, lvl, printing, printType);
 
         //testing all feats
-        for (String key : featLibrary.keySet())
-            addFeat(key, printingCheck(printType, "addFeat"));
-        initializeFeats(printingCheck(printType, "initializeFeats"));
+//        for (String key : featLibrary.keySet())
+//            addFeat(key, printingCheck(printType, "addFeat"));
+//        initializeFeats(printingCheck(printType, "initializeFeats"));
 
         if (printingCheck(printType, "list")) {
             printSkills();
@@ -375,11 +375,11 @@ public class Player {
         levelUp(c2, c2lvl, printing, printType);
 
         //testing all feats
-        for (String key : featLibrary.keySet())
-            addFeat(key, printingCheck(printType, "addFeat"));
-        initializeFeats(printingCheck(printType, "initializeFeats"));
-        if (printingCheck(printType, "feats"))
-            printFeats();
+//        for (String key : featLibrary.keySet())
+//            addFeat(key, printingCheck(printType, "addFeat"));
+//        initializeFeats(printingCheck(printType, "initializeFeats"));
+//        if (printingCheck(printType, "feats"))
+//            printFeats();
     }
 
     /**
@@ -970,6 +970,141 @@ public class Player {
         if (printing) System.out.printf("TotalRanks: %d%n", totalRanks);
     }
 
+    /**
+     * Helper method, created to make implementation of skills more readable. Will continue to use array to store
+     * skills, but now when skills are being referred to you can use this method to convert a string of a skill
+     * into the correct index.
+     *
+     * @param skill Name of desired skill
+     * @return int value of skill. Force Skills will all be at least 38
+     */
+    public int getSkillIndex(String skill) {
+        String s = skill.toLowerCase().replaceAll("\\s","");
+        switch (s) {
+            case "appraise":
+                return 0;
+            case "astrogate":
+                return 1;
+            case "balance":
+                return 2;
+            case "bluff":
+                return 3;
+            case "climb":
+                return 4;
+            case "computeruse":
+                return 5;
+            case "craft1":
+                return 6;
+            case "craft2":
+                return 7;
+            case "craft3":
+                return 8;
+            case "demolitions":
+                return 9;
+            case "diplomacy":
+                return 10;
+            case "disabledevice":
+                return 11;
+            case "disguise":
+                return 12;
+            case "entertain":
+                return 13;
+            case "escapeartist":
+                return 14;
+            case "forgery":
+                return 15;
+            case "gamble":
+                return 16;
+            case "gatherinformation":
+                return 17;
+            case "handleanimal":
+                return 18;
+            case "hide":
+                return 19;
+            case "intimidate":
+                return 20;
+            case "jump":
+                return 21;
+            case "knowledge1":
+                return 22;
+            case "knowledge2":
+                return 23;
+            case "knowledge3":
+                return 24;
+            case "listen":
+                return 25;
+            case "movesilently":
+                return 26;
+            case "pilot":
+                return 27;
+            case "profession":
+                return 28;
+            case "repair":
+                return 29;
+            case "ride":
+                return 30;
+            case "search":
+                return 31;
+            case "sensemotive":
+                return 32;
+            case "sleightofhand":
+                return 33;
+            case "spot":
+                return 34;
+            case "survival":
+                return 35;
+            case "swim":
+                return 36;
+            case "treatinjury":
+                return 37;
+            case "tumble":
+                return 38;
+            case "affectmind":
+                return 39;
+            case "battlemind":
+                return 40;
+            case "drainenergy":
+                return 41;
+            case "empathy":
+                return 42;
+            case "enhanceability":
+                return 43;
+            case "enhancesenses":
+                return 44;
+            case "farseeing":
+                return 45;
+            case "fear":
+                return 46;
+            case "forcedefence":
+                return 47;
+            case "forcegrip":
+                return 48;
+            case "forcelightning":
+                return 49;
+            case "forcestealth":
+                return 50;
+            case "forcestrike":
+                return 51;
+            case "friendship":
+                return 52;
+            case "healanother":
+                return 53;
+            case "healself":
+                return 54;
+            case "illusion":
+                return 55;
+            case "moveobject":
+                return 56;
+            case "seeforce":
+                return 57;
+            case "telepathy":
+                return 58;
+            default:
+                System.out.printf("ERROR converting String Skill into an int index. Unknown skill: %s%n", skill);
+                return -1;
+        }
+    }
+
     /////////////////////////////////// Leveling Up RNG ////////////////////////////////////////////
 
     /**
@@ -1383,7 +1518,10 @@ public class Player {
     /**
      * Refreshes the initiative.
      */
-    private void refreshInitiative() { initiative = dMod + dexTempMod + initiativeMiscBonus; }
+    private void refreshInitiative() {
+        //System.out.printf("dMod=%d, dexTempMod=%d, initiative");
+        initiative = dMod + dexTempMod + initiativeMiscBonus;
+    }
 
     /**
      * Refreshes the combat fields.
@@ -1522,7 +1660,7 @@ public class Player {
         featLibrary.put("RUN", new Run());
         featLibrary.put("SHARP EYED", new SharpEyed());
         featLibrary.put("SHOT ON THE RUN", new ShotOnTheRun());
-        featLibrary.put("SHILL EMPHASIS", new SkillEmphasis(0, false));
+        featLibrary.put("SKILL EMPHASIS", new SkillEmphasis("Appraise"));
         featLibrary.put("SPACER", new Spacer());
         featLibrary.put("SPRING ATTACK", new SpringAttack());
         featLibrary.put("STAMINA", new Stamina());
@@ -1535,8 +1673,8 @@ public class Player {
         featLibrary.put("TOUGHNESS", new Toughness());
         featLibrary.put("TRACK", new Track());
         featLibrary.put("TRICK", new Trick());
-//        featLibrary.put("TRUSTWORTHY", new Trustworthy());
-//        featLibrary.put("TWO WEAPON FIGHTING", new TwoWeaponFighting());
+        featLibrary.put("TRUSTWORTHY", new Trustworthy());
+        featLibrary.put("TWO WEAPON FIGHTING", new TwoWeaponFighting());
 //        featLibrary.put("WEAPON FINESSE", new WeaponFinesse());
 //        featLibrary.put("WEAPON FOCUS", new WeaponFocus());
 //        featLibrary.put("WEAPON GROUP PROFICIENCY", new WeaponGroupProficiency());
@@ -1550,120 +1688,124 @@ public class Player {
     }
 
     /**
-     * Iterates through each feat to check if they add misc bonuses to skills. If they don't add bonuses,
-     * it just passes by them to the next feat.
+     * Activates the perks of a feat for a Player; a Player can acquire a Feat, but that Feat doesn't
+     * actually buff stats etc until it has been activated by this method.
+     *
      * @param printing Used for debugging purposes. Determines whether or not to print extra data to
      *                 the console.
      */
-    private void initializeFeats(boolean printing) {
+    public void initializeFeat(String key, boolean printing) {
+        key = key.toUpperCase();
+        //if the feat has already been initialized, then continue to the next feat
+        if (this.feats.get(key).isInitialized())
+            return;
+        //check to see if the feat boosts skills
+        if (this.feats.get(key).areSkillsBoosted()) {
+            for (String featKey : this.feats.get(key).skillsBoosted.keySet()) {
+                //Go through and add the bonuses to the corresponding misc bonus in the player skill array.
+                if (printing)
+                    System.out.printf("Adding %d misc bonus to %s%n",this.feats.get(key).skillsBoosted.get(featKey), featKey);
+                int skillIndex = getSkillIndex(featKey);
+                if (skillIndex < skills.length)
+                    skills[skillIndex].addMiscMod(this.feats.get(key).skillsBoosted.get(featKey));
+                else {
+                    skillIndex -= skills.length;
+                    forceSkills[skillIndex].addMiscMod(this.feats.get(key).skillsBoosted.get(featKey));
+                }
+            }
+        }
+        //Alter force skills = 0, 2, 9, 10, 12, 14, 16, 17
+        if (key.contains("Alter")) {
+            forceSkills[0].setClassSkill(true);
+            forceSkills[2].setClassSkill(true);
+            forceSkills[9].setClassSkill(true);
+            forceSkills[10].setClassSkill(true);
+            forceSkills[12].setClassSkill(true);
+            forceSkills[14].setClassSkill(true);
+            forceSkills[16].setClassSkill(true);
+            forceSkills[17].setClassSkill(true);
+        }
+        //Control force skills = 1, 8, 11, 15
+        if (key.contains("Control")) {
+            forceSkills[1].setClassSkill(true);
+            forceSkills[8].setClassSkill(true);
+            forceSkills[11].setClassSkill(true);
+            forceSkills[15].setClassSkill(true);
+        }
+        //Sense force skills = 5, 6, 7, 18, 19
+        if (key.contains("Sense")) {
+            forceSkills[5].setClassSkill(true);
+            forceSkills[6].setClassSkill(true);
+            forceSkills[7].setClassSkill(true);
+            forceSkills[18].setClassSkill(true);
+            forceSkills[19].setClassSkill(true);
+        }
+        if (this.feats.get(key).getMiscBonus() > 0)
+            switch (key) {
+                case "DODGE":
+                    dodgeBonus += this.feats.get(key).getMiscBonus();
+                    break;
+                case "GREAT FORTITUDE":
+                    fortitudeMiscMod += this.feats.get(key).getMiscBonus();
+                case "HEADSTRONG":
+                    willMiscMod += this.feats.get(key).getMiscBonus();
+                case "IMPROVED CRITICAL":
+                    //TODO need to do when I do weapons, probably something like this:
+                    //weaponRack(feats.get(key).getSpecialty()).increaseCritical(feats.get(key).getMiscBonus());
+                    break;
+                case "IMPROVED INITIATIVE":
+                    initiativeMiscBonus += this.feats.get(key).getMiscBonus();
+                    break;
+                case "FAME":
+                    reputation += this.feats.get(key).getMiscBonus();
+                    break;
+                case "INFAMY":
+                    reputation += this.feats.get(key).getMiscBonus();
+                    break;
+                case "KNIGHT DEFENSE":
+                    dodgeBonus += this.feats.get(key).getMiscBonus();
+                    break;
+                case "IRON WILL":
+                    willMiscMod += this.feats.get(key).getMiscBonus();
+                    break;
+                case "LIGHTNING REFLEXES":
+                    reflexMiscMod += this.feats.get(key).getMiscBonus();
+                    break;
+                case "LIGHTSABER DEFENSES":
+                    dodgeBonus += this.feats.get(key).getMiscBonus();
+                    break;
+                case "LOW PROFILE":
+                    reputation += this.feats.get(key).getMiscBonus();
+                    break;
+                case "MASTER DEFENSE":
+                    dodgeBonus += this.feats.get(key).getMiscBonus();
+                    break;
+                case "QUICKNESS":
+                    maxVP += this.feats.get(key).getMiscBonus();
+                    break;
+                case "RUGGED":
+                    fortitudeMiscMod += this.feats.get(key).getMiscBonus();
+                    break;
+                case "TOUGHNESS":
+                    maxWP += this.feats.get(key).getMiscBonus();
+                    break;
+
+            }
+
+            this.feats.get(key).initialize();
+
+        if (printing)
+            System.out.printf("%s : %s%n", key, this.feats.get(key).getInfo());
+    }
+
+    /**
+     * Iterates through each feat to check if they add misc bonuses to skills. If they don't add bonuses,
+     * it just passes on to the next feat.
+     * @param printing Determines whether or not to print debugging statements in the initializeFeat method
+     */
+    public void initializeFeats(boolean printing) {
         for (String key : this.feats.keySet()) {
-            //if the feat has already been initialized, then continue to the next feat
-            if (this.feats.get(key).isInitialized())
-                continue;
-            //check to see if the feat boosts skills
-            if (this.feats.get(key).areSkillsBoosted()) {
-                for (int i = 0; i < this.feats.get(key).getSkills().length; i++) {
-                    //Loop through the array held by the Feat, inside there is information on which skills are boosted.
-                    //Go through and add the bonuses to the corresponding misc bonus in the player skill array.
-                    //TODO Can be optimized. Doesnt need full array to hold values, can just be a stack/queue/list of pairs of values
-                    if (printing && this.feats.get(key).getSkills()[i] > 0)
-                        System.out.printf("Adding %d misc bonus to %s%n",feats.get(key).getSkills()[i], skills[i].getType().getName());
-                    skills[i].addMiscMod(this.feats.get(key).getSkills()[i]);
-                }
-            }
-            //check to see if the Feat boosts Force skills
-            else if (this.feats.get(key).areFSkillsBoosted()) {
-                for (int i = 0; i < this.feats.get(key).getForceSkills().length; i++) {
-                    //Loop through the array held by the Feat, inside there is information on which skills are boosted.
-                    //Go through and add the bonuses to the corresponding misc bonus in the player skill array.
-                    //TODO Can be optimized. Doesnt need full array to hold values, can just be a stack/queue/list of pairs of values
-                    if (printing && this.feats.get(key).getForceSkills()[i] > 0)
-                        System.out.printf("Adding %d misc bonus to %s%n",this.feats.get(key).getForceSkills()[i], forceSkills[i].getType().getName());
-                    forceSkills[i].addMiscMod(this.feats.get(key).getForceSkills()[i]);
-                }
-            }
-            //Alter force skills = 0, 2, 9, 10, 12, 14, 16, 17
-            if (key.contains("Alter")) {
-                forceSkills[0].setClassSkill(true);
-                forceSkills[2].setClassSkill(true);
-                forceSkills[9].setClassSkill(true);
-                forceSkills[10].setClassSkill(true);
-                forceSkills[12].setClassSkill(true);
-                forceSkills[14].setClassSkill(true);
-                forceSkills[16].setClassSkill(true);
-                forceSkills[17].setClassSkill(true);
-            }
-            //Control force skills = 1, 8, 11, 15
-            if (key.contains("Control")) {
-                forceSkills[1].setClassSkill(true);
-                forceSkills[8].setClassSkill(true);
-                forceSkills[11].setClassSkill(true);
-                forceSkills[15].setClassSkill(true);
-            }
-            //Sense force skills = 5, 6, 7, 18, 19
-            if (key.contains("Sense")) {
-                forceSkills[5].setClassSkill(true);
-                forceSkills[6].setClassSkill(true);
-                forceSkills[7].setClassSkill(true);
-                forceSkills[18].setClassSkill(true);
-                forceSkills[19].setClassSkill(true);
-            }
-            if (this.feats.get(key).getMiscBonus() > 0)
-                switch (key) {
-                    case "DODGE":
-                        dodgeBonus += this.feats.get(key).getMiscBonus();
-                        break;
-                    case "GREAT FORTITUDE":
-                        fortitudeMiscMod += this.feats.get(key).getMiscBonus();
-                    case "HEADSTRONG":
-                        willMiscMod += this.feats.get(key).getMiscBonus();
-                    case "IMPROVED CRITICAL":
-                        //TODO need to do when I do weapons, probably something like this:
-                        //weaponRack(feats.get(key).getSpecialty()).increaseCritical(feats.get(key).getMiscBonus());
-                        break;
-                    case "IMPROVED INITIATIVE":
-                        initiativeMiscBonus += this.feats.get(key).getMiscBonus();
-                        break;
-                    case "FAME":
-                        reputation += this.feats.get(key).getMiscBonus();
-                        break;
-                    case "INFAMY":
-                        reputation += this.feats.get(key).getMiscBonus();
-                        break;
-                    case "KNIGHT DEFENSE":
-                        dodgeBonus += this.feats.get(key).getMiscBonus();
-                        break;
-                    case "IRON WILL":
-                        willMiscMod += this.feats.get(key).getMiscBonus();
-                        break;
-                    case "LIGHTNING REFLEXES":
-                        reflexMiscMod += this.feats.get(key).getMiscBonus();
-                        break;
-                    case "LIGHTSABER DEFENSES":
-                        dodgeBonus += this.feats.get(key).getMiscBonus();
-                        break;
-                    case "LOW PROFILE":
-                        reputation += this.feats.get(key).getMiscBonus();
-                        break;
-                    case "MASTER DEFENSE":
-                        dodgeBonus += this.feats.get(key).getMiscBonus();
-                        break;
-                    case "QUICKNESS":
-                        maxVP += this.feats.get(key).getMiscBonus();
-                        break;
-                    case "RUGGED":
-                        fortitudeMiscMod += this.feats.get(key).getMiscBonus();
-                        break;
-                    case "TOUGHNESS":
-                        maxWP += this.feats.get(key).getMiscBonus();
-                        break;
-
-                }
-
-                this.feats.get(key).initialize();
-
-            if (printing)
-                System.out.printf("%s : %s%n", key, this.feats.get(key).getInfo());
+            initializeFeat(key, printing);
         }
     }
 
@@ -1825,7 +1967,8 @@ public class Player {
      * @param printing Used for debugging
      * @return true if the feat is successfully added, false otherwise.
      */
-    private boolean addFeat(String s, boolean printing) {
+    public boolean addFeat(String s, boolean printing) {
+        s = s.toUpperCase();
         Feat f = featLibrary.get(s);
         boolean out = false;
         if (meetsPrereqs(f, printing)) {
@@ -1839,13 +1982,290 @@ public class Player {
         return out;
     }
 
+    /** TODO
+     *  Helper method to determine a truly random Feat from the selection of all possible Feats. Upon
+     *  first approach of this method, I believe we need another method that will index all Feats to ints.
+     * @return The randomly chosen Feat
+     */
+    private Feat pickRandomFeat() {
+        die = new Dice();
+        int i;
+        boolean chosen = false;
+        Object[] values = featLibrary.keySet().toArray();
+
+        while (!chosen) {
+            i = die.roll(values.length);
+//            String f = values[i];
+            if (meetsPrereqs((Feat) values[i], true)) {
+                //TODO
+                //addFeat();
+                System.out.println("BIRD UP");
+            }
+        }
+        return null;
+    }
+
+    public Feat indexToFeat(int i) {
+        switch (i) {
+            case 0:
+                return featLibrary.get("ACROBATIC");
+            case 1:
+                return featLibrary.get("ADVANCED MARTIAL ARTS");
+            case 2:
+                return featLibrary.get("ALERTNESS");
+            case 3:
+                return featLibrary.get("ALTER");
+            case 4:
+                return featLibrary.get("AMBIDEXTERITY");
+            case 5:
+                return featLibrary.get("ANIMAL AFFINITY");
+            case 6:
+                return featLibrary.get("ARMOR PROFICIENCY HEAVY");
+            case 7:
+                return featLibrary.get("ARMOR PROFICIENCY LIGHT");
+            case 8:
+                return featLibrary.get("ARMOR PROFICIENCY MEDIUM");
+            case 9:
+                return featLibrary.get("ARMOR PROFICIENCY POWERED");
+            case 10:
+                return featLibrary.get("ATHLETIC");
+            case 11:
+                return featLibrary.get("ATTUNED");
+            case 12:
+                return featLibrary.get("AWARE");
+            case 13:
+                return featLibrary.get("BLIND FIGHT");
+            case 14:
+                return featLibrary.get("BURST OF SPEED");
+            case 15:
+                return featLibrary.get("CAUTIOUS");
+            case 16:
+                return featLibrary.get("CLEAVE");
+            case 17:
+                return featLibrary.get("COMBAT EXPERTISE");
+            case 18:
+                return featLibrary.get("COMBAT REFLEXES");
+            case 19:
+                return featLibrary.get("COMPASSION");
+            case 20:
+                return featLibrary.get("DEFENSIVE MARTIAL ARTS");
+            case 21:
+                return featLibrary.get("DISSIPATE ENERGY");
+            case 22:
+                return featLibrary.get("DODGE");
+            case 23:
+                return featLibrary.get("ENDURANCE");
+            case 24:
+                return featLibrary.get("EXOTIC WEAPON PROFICIENCY");
+            case 25:
+                return featLibrary.get("FAME");
+            case 26:
+                return featLibrary.get("FAR SHOT");
+            case 27:
+                return featLibrary.get("FOCUS");
+            case 28:
+                return featLibrary.get("FORCE FLIGHT");
+            case 29:
+                return featLibrary.get("FORCE MASTERY");
+            case 30:
+                return featLibrary.get("FORCE MIND");
+            case 31:
+                return featLibrary.get("FORCE SENSITIVE");
+            case 32:
+                return featLibrary.get("FORCE SPEED");
+            case 33:
+                return featLibrary.get("FORCE WHIRLWIND");
+            case 34:
+                return featLibrary.get("FRIGHTFUL PRESENCE");
+            case 35:
+                return featLibrary.get("GEARHEAD");
+            case 36:
+                return featLibrary.get("GREAT CLEAVE");
+            case 37:
+                return featLibrary.get("GREAT FORTITUDE");
+            case 38:
+                return featLibrary.get("HEADSTRONG");
+            case 39:
+                return featLibrary.get("HEROIC SURGE");
+            case 40:
+                return featLibrary.get("HIGH FORCE MASTERY");
+            case 41:
+                return featLibrary.get("IMPROVED BANTHA RUSH");
+            case 42:
+                return featLibrary.get("IMPROVED CRITICAL");
+            case 43:
+                return featLibrary.get("IMPROVED DISARM");
+            case 44:
+                return featLibrary.get("IMPROVED FORCE MIND");
+            case 45:
+                return featLibrary.get("IMPROVED INITIATIVE");
+            case 46:
+                return featLibrary.get("IMPROVED MARTIAL ARTS");
+            case 47:
+                return featLibrary.get("IMPROVED TRIP");
+            case 48:
+                return featLibrary.get("IMPROVED TWO WEAPON FIGHTING");
+            case 49:
+                return featLibrary.get("INFAMY");
+            case 50:
+                return featLibrary.get("INFLUENCE");
+            case 51:
+                return featLibrary.get("IRON WILL");
+            case 52:
+                return featLibrary.get("KNIGHT DEFENSE");
+            case 53:
+                return featLibrary.get("KNIGHT MIND");
+            case 54:
+                return featLibrary.get("KNIGHT SPEED");
+            case 55:
+                return featLibrary.get("LIGHTNING REFLEXES");
+            case 56:
+                return featLibrary.get("LIGHTSABER DEFENSE");
+            case 57:
+                return featLibrary.get("LINK");
+            case 58:
+                return featLibrary.get("LOW PROFILE");
+            case 59:
+                return featLibrary.get("MALEVOLENT");
+            case 60:
+                return featLibrary.get("MARTIAL ARTS");
+            case 61:
+                return featLibrary.get("MASTER DEFENSE");
+            case 62:
+                return featLibrary.get("MASTER MIND");
+            case 63:
+                return featLibrary.get("MASTER SPEED");
+            case 64:
+                return featLibrary.get("METTLE");
+            case 65:
+                return featLibrary.get("MIMIC");
+            case 66:
+                return featLibrary.get("MIND TRICK");
+            case 67:
+                return featLibrary.get("MOBILITY");
+            case 68:
+                return featLibrary.get("MULTISHOT");
+            case 69:
+                return featLibrary.get("NIMBLE");
+            case 70:
+                return featLibrary.get("PERSUASIVE");
+            case 71:
+                return featLibrary.get("POINT BLANK SHOT");
+            case 72:
+                return featLibrary.get("POWER ATTACK");
+            case 73:
+                return featLibrary.get("PRECISE SHOT");
+            case 74:
+                return featLibrary.get("QUICK DRAW");
+            case 75:
+                return featLibrary.get("QUICKNESS");
+            case 76:
+                return featLibrary.get("RAGE");
+            case 77:
+                return featLibrary.get("RAPID SHOT");
+            case 78:
+                return featLibrary.get("RUGGED");
+            case 79:
+                return featLibrary.get("RUN");
+            case 80:
+                return featLibrary.get("SHARP EYED");
+            case 81:
+                return featLibrary.get("SHOT ON THE RUN");
+            case 82:
+                return featLibrary.get("SKILL EMPHASIS");
+            case 83:
+                return featLibrary.get("SPACER");
+            case 84:
+                return featLibrary.get("SPRING ATTACK");
+            case 85:
+                return featLibrary.get("STAMINA");
+            case 86:
+                return featLibrary.get("STARSHIP DODGE");
+            case 87:
+                return featLibrary.get("STARSHIP OPERATION");
+            case 88:
+                return featLibrary.get("STEADY");
+            case 89:
+                return featLibrary.get("STEALTHY");
+            case 90:
+                return featLibrary.get("SUNDER");
+            case 91:
+                return featLibrary.get("SURGERY");
+            case 92:
+                return featLibrary.get("TOUGHNESS");
+            case 93:
+                return featLibrary.get("TRACK");
+            case 94:
+                return featLibrary.get("TRICK");
+//            case 95:
+//                return featLibrary.get("");
+//                break;
+//            case 96:
+//                return featLibrary.get("");
+//                break;
+//            case 97:
+//                return featLibrary.get("");
+//                break;
+//            case 98:
+//                return featLibrary.get("");
+//                break;
+//            case 99:
+//                return featLibrary.get("");
+//                break;
+//            case 100:
+//                return featLibrary.get("");
+//                break;
+            default:
+                return null;
+//            case 1:
+//                return featLibrary.get("");
+//            break;
+//            case 2:
+//                return featLibrary.get("");
+//            break;
+//            case 3:
+//                return featLibrary.get("");
+//            break;
+//            case 4:
+//                return featLibrary.get("");
+//            break;
+//            case 5:
+//                return featLibrary.get("");
+//            break;
+//            case 6:
+//                return featLibrary.get("");
+//            break;
+//            case 7:
+//                return featLibrary.get("");
+//            break;
+//            case 8:
+//                return featLibrary.get("");
+//            break;
+//            case 9:
+//                return featLibrary.get("");
+//            break;
+//            case 0:
+//                return featLibrary.get("");
+//            break;
+        }
+    }
+
+    /**
+     * Getter method for determining whether a Player has a given Feat.
+     * @param feat The String representation of the desired Feat
+     * @return True if the Player contains that Feat
+     */
+    public boolean hasFeat(String feat) {
+        return feats.containsKey(feat.toUpperCase());
+    }
+
     ///////////////////////////////////////////TESTER METHODS///////////////////////////////////////
 
 
     /**
      * Prints out the list of Class skills for the Class object calling this method.
      */
-    protected void printSkills() {
+    public void printSkills() {
         System.out.printf("Skill Modifiers for %s are as such:%n", name);
         System.out.println("Skill Name---------------AtMod-Ranks-Misc-Total Skill Modifier");
         StringBuilder preBuff;

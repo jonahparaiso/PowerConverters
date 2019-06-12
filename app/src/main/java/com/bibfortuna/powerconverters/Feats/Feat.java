@@ -23,7 +23,7 @@ public class Feat {
 
     private int miscBonus;
 
-    private HashMap<String,Integer>  skillsBoosted;
+    public HashMap<String,Integer>  skillsBoosted;
     private boolean skillsAreBoosted;
     private boolean fSkillsAreBoosted;
     private boolean canTake10;
@@ -60,8 +60,6 @@ public class Feat {
 
     public int getMiscBonus() { return miscBonus; }
 
-    public int[] getSkills() { return  skillsBoosted; }
-    public int[] getForceSkills() { return  fSkillsBoosted; }
     public boolean areSkillsBoosted() { return skillsAreBoosted; }
     public boolean areFSkillsBoosted() { return  fSkillsAreBoosted; }
     public boolean getCanTake10() { return canTake10; }
@@ -191,6 +189,7 @@ public class Feat {
                 return 58;
             default:
                 System.out.println("ERROR converting String Skill into an int index");
+                return -1;
         }
     }
 
@@ -198,18 +197,14 @@ public class Feat {
     //////////////////////////////////////////SETTERS///////////////////////////////////////////////
 
     protected void boostSkill(String s, int boost) {
-        int index = getSkillIndex(s);
-        if (index < 39) {
-            skillsBoosted = new int[39];
-            skillsBoosted[index] = boost;
-            skillsAreBoosted = true;
+        if(!skillsBoosted.containsKey(s)) {
+            skillsBoosted.put(s, boost);
         }
         else {
-            index -= 38;
-            fSkillsBoosted = new int[20];
-            fSkillsBoosted[index] = boost;
-            fSkillsAreBoosted = true;
+            skillsBoosted.put(s, skillsBoosted.get(s) + boost);
         }
+        skillsAreBoosted = getSkillIndex(s) < 39 ? true : false;
+        fSkillsAreBoosted = getSkillIndex(s) > 38 ? true : false;
     }
 
     protected void boostMisc(int bonus) {
