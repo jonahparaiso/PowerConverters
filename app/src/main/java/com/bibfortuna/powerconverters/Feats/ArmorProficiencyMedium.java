@@ -10,7 +10,7 @@ public class ArmorProficiencyMedium extends Feat {
                 "   Normal: A character who wears armor with which she is not proficient takes an armor\n" +
                 "       check penalty on attack rolls and on all skill checks that involve moving, including\n" +
                 "       Ride and Pilot.");
-        prereqs.put("ARMOR PROFICIENCY MEDIUM", 1);
+        prereqs.put("ARMOR PROFICIENCY LIGHT", 1);
 
     }
 }

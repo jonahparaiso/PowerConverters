@@ -32,10 +32,15 @@ public class PlayerTest {
 //        Player multi = new Player(new TechSpecialist(), 10, new Scoundrel(), 2, true, "list");
     }
 
-//    @Test
-//    public void printConstructor3() {
+    @Test
+    public void printConstructor3() {
 //        System.out.println("Testing printConstructor3");
-        Player test = new Player(Species.WOOKIEE, new JediGuardian(), 20, true, "list");
-        //Player test = new Player();
-//    }
+        Player gunthar = new Player(Species.CEREAN, new Scout(), 4, true, "list");
+        gunthar.printSkills();
+        gunthar.printAttributes();
+        gunthar.printCombat();
+        gunthar.printHealth();
+        gunthar.printMisc();
+        gunthar.printSavingThrows();
+    }
 }

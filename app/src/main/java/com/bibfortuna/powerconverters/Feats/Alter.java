@@ -16,6 +16,6 @@ public class Alter extends Feat {
                 "       no bonus feat is gained when the character reaches the level at which the Force\n" +
                 "       training would provide Alter free.");
         prereqs.put("FORCE SENSITIVE", 1);
-        prereqs.put("FORCE LEVEL", 1);
+        prereqs.put("FLV", 1);
     }
 }

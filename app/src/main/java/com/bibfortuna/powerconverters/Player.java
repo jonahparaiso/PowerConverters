@@ -209,6 +209,7 @@ public class Player {
      * Player assuming the player knows their starting attribute scores, class, species, etc
      *
      * @param n   = name
+     * @param sex = gender
      * @param r   = species
      * @param c   = class
      * @param lvl = starting level
@@ -230,10 +231,10 @@ public class Player {
         }
         this.die = new Dice();
         this.name = n;
-        if (sex.contains("m"))
-            this.gender = "Male";
-        else
+        if (sex.contains("F"))
             this.gender = "Female";
+        else
+            this.gender = "Male";
         this.race = r;
         this.classes = new HashMap<>();
         classes.put(c.name, c);
@@ -270,7 +271,7 @@ public class Player {
      * @param printing Whether to print out statements for debugging or not.
      * @param printType The desired function to print out for debugging. See printingType() for possible values
      */
-    Player(Species r, Classs c, int lvl, boolean printing, String printType) {
+    public Player(Species r, Classs c, int lvl, boolean printing, String printType) {
         printType = printType.toUpperCase();
 
         this.die = new Dice();
@@ -333,7 +334,7 @@ public class Player {
      * @param printing Boolean for whether or not to print out debugging statements
      * @param printType String specifying which method to print debugging statements
      */
-    Player(Classs c1, int c1lvl, Classs c2, int c2lvl, boolean printing, String printType) {
+    public Player(Classs c1, int c1lvl, Classs c2, int c2lvl, boolean printing, String printType) {
         this.die = new Dice();
         switch (die.roll(2)) {
             case 1:
@@ -1597,6 +1598,7 @@ public class Player {
         featLibrary.put("COMBAT EXPERTISE", new CombatExpertise());
         featLibrary.put("COMBAT REFLEXES", new CombatReflexes());
         featLibrary.put("COMPASSION", new Compassion());
+        featLibrary.put("CONTROL", new Control());
         featLibrary.put("DEFENSIVE MARTIAL ARTS", new DefensiveMartialArts());
         featLibrary.put("DISSIPATE ENERGY", new DissipateEnergy());
         featLibrary.put("DODGE", new Dodge());
@@ -1823,6 +1825,7 @@ public class Player {
         boolean out = false;
         StringBuilder requirements = new StringBuilder("");
         HashMap<String,Integer> map = f.getPrereqs();
+        boolean hasFailures = false;
         String key;
         int reqValue, skillIndex;
         if (printing)
@@ -1832,6 +1835,8 @@ public class Player {
         for (Object k : map.keySet()) {
             key = k.toString().toUpperCase();
             reqValue = map.get(k);
+            if (printing)
+                System.out.printf("\t%s requires %s %s%n",f.getName(),key,reqValue);
             //Determining if the prereq is a feat or an attribute, the below case means it's the latter
             if (key.length() == 3 && !key.equals("RUN")) {
                 switch (key) {
@@ -1952,13 +1957,15 @@ public class Player {
                     requirements.append("   ").append(key).append("\n");
                 }
             }
+            if (!out)
+                hasFailures = true;
         }
-        if (out && printing)
+        if (!hasFailures && printing)
             System.out.printf("%s meets all prereqs for feat %s%n", this.name, f.getName());
-        else if (printing)
+        else if (hasFailures && printing)
             System.out.printf("%s does not meet all prereqs for feat %s%nRequired:%n%s%n", this.name, f.getName(), requirements);
 
-        return out;
+        return !hasFailures;
     }
 
     /**
@@ -1971,7 +1978,7 @@ public class Player {
         s = s.toUpperCase();
         Feat f = featLibrary.get(s);
         boolean out = false;
-        if (meetsPrereqs(f, printing)) {
+        if (this.meetsPrereqs(f, printing)) {
             out = true;
             this.feats.put(s,f);
             if (printing)
@@ -2048,154 +2055,156 @@ public class Player {
             case 19:
                 return featLibrary.get("COMPASSION");
             case 20:
-                return featLibrary.get("DEFENSIVE MARTIAL ARTS");
+                return featLibrary.get("CONTROL");
             case 21:
-                return featLibrary.get("DISSIPATE ENERGY");
+                return featLibrary.get("DEFENSIVE MARTIAL ARTS");
             case 22:
-                return featLibrary.get("DODGE");
+                return featLibrary.get("DISSIPATE ENERGY");
             case 23:
-                return featLibrary.get("ENDURANCE");
+                return featLibrary.get("DODGE");
             case 24:
-                return featLibrary.get("EXOTIC WEAPON PROFICIENCY");
+                return featLibrary.get("ENDURANCE");
             case 25:
-                return featLibrary.get("FAME");
+                return featLibrary.get("EXOTIC WEAPON PROFICIENCY");
             case 26:
-                return featLibrary.get("FAR SHOT");
+                return featLibrary.get("FAME");
             case 27:
-                return featLibrary.get("FOCUS");
+                return featLibrary.get("FAR SHOT");
             case 28:
-                return featLibrary.get("FORCE FLIGHT");
+                return featLibrary.get("FOCUS");
             case 29:
-                return featLibrary.get("FORCE MASTERY");
+                return featLibrary.get("FORCE FLIGHT");
             case 30:
-                return featLibrary.get("FORCE MIND");
+                return featLibrary.get("FORCE MASTERY");
             case 31:
-                return featLibrary.get("FORCE SENSITIVE");
+                return featLibrary.get("FORCE MIND");
             case 32:
-                return featLibrary.get("FORCE SPEED");
+                return featLibrary.get("FORCE SENSITIVE");
             case 33:
-                return featLibrary.get("FORCE WHIRLWIND");
+                return featLibrary.get("FORCE SPEED");
             case 34:
-                return featLibrary.get("FRIGHTFUL PRESENCE");
+                return featLibrary.get("FORCE WHIRLWIND");
             case 35:
-                return featLibrary.get("GEARHEAD");
+                return featLibrary.get("FRIGHTFUL PRESENCE");
             case 36:
-                return featLibrary.get("GREAT CLEAVE");
+                return featLibrary.get("GEARHEAD");
             case 37:
-                return featLibrary.get("GREAT FORTITUDE");
+                return featLibrary.get("GREAT CLEAVE");
             case 38:
-                return featLibrary.get("HEADSTRONG");
+                return featLibrary.get("GREAT FORTITUDE");
             case 39:
-                return featLibrary.get("HEROIC SURGE");
+                return featLibrary.get("HEADSTRONG");
             case 40:
-                return featLibrary.get("HIGH FORCE MASTERY");
+                return featLibrary.get("HEROIC SURGE");
             case 41:
-                return featLibrary.get("IMPROVED BANTHA RUSH");
+                return featLibrary.get("HIGH FORCE MASTERY");
             case 42:
-                return featLibrary.get("IMPROVED CRITICAL");
+                return featLibrary.get("IMPROVED BANTHA RUSH");
             case 43:
-                return featLibrary.get("IMPROVED DISARM");
+                return featLibrary.get("IMPROVED CRITICAL");
             case 44:
-                return featLibrary.get("IMPROVED FORCE MIND");
+                return featLibrary.get("IMPROVED DISARM");
             case 45:
-                return featLibrary.get("IMPROVED INITIATIVE");
+                return featLibrary.get("IMPROVED FORCE MIND");
             case 46:
-                return featLibrary.get("IMPROVED MARTIAL ARTS");
+                return featLibrary.get("IMPROVED INITIATIVE");
             case 47:
-                return featLibrary.get("IMPROVED TRIP");
+                return featLibrary.get("IMPROVED MARTIAL ARTS");
             case 48:
-                return featLibrary.get("IMPROVED TWO WEAPON FIGHTING");
+                return featLibrary.get("IMPROVED TRIP");
             case 49:
-                return featLibrary.get("INFAMY");
+                return featLibrary.get("IMPROVED TWO WEAPON FIGHTING");
             case 50:
-                return featLibrary.get("INFLUENCE");
+                return featLibrary.get("INFAMY");
             case 51:
-                return featLibrary.get("IRON WILL");
+                return featLibrary.get("INFLUENCE");
             case 52:
-                return featLibrary.get("KNIGHT DEFENSE");
+                return featLibrary.get("IRON WILL");
             case 53:
-                return featLibrary.get("KNIGHT MIND");
+                return featLibrary.get("KNIGHT DEFENSE");
             case 54:
-                return featLibrary.get("KNIGHT SPEED");
+                return featLibrary.get("KNIGHT MIND");
             case 55:
-                return featLibrary.get("LIGHTNING REFLEXES");
+                return featLibrary.get("KNIGHT SPEED");
             case 56:
-                return featLibrary.get("LIGHTSABER DEFENSE");
+                return featLibrary.get("LIGHTNING REFLEXES");
             case 57:
-                return featLibrary.get("LINK");
+                return featLibrary.get("LIGHTSABER DEFENSE");
             case 58:
-                return featLibrary.get("LOW PROFILE");
+                return featLibrary.get("LINK");
             case 59:
-                return featLibrary.get("MALEVOLENT");
+                return featLibrary.get("LOW PROFILE");
             case 60:
-                return featLibrary.get("MARTIAL ARTS");
+                return featLibrary.get("MALEVOLENT");
             case 61:
-                return featLibrary.get("MASTER DEFENSE");
+                return featLibrary.get("MARTIAL ARTS");
             case 62:
-                return featLibrary.get("MASTER MIND");
+                return featLibrary.get("MASTER DEFENSE");
             case 63:
-                return featLibrary.get("MASTER SPEED");
+                return featLibrary.get("MASTER MIND");
             case 64:
-                return featLibrary.get("METTLE");
+                return featLibrary.get("MASTER SPEED");
             case 65:
-                return featLibrary.get("MIMIC");
+                return featLibrary.get("METTLE");
             case 66:
-                return featLibrary.get("MIND TRICK");
+                return featLibrary.get("MIMIC");
             case 67:
-                return featLibrary.get("MOBILITY");
+                return featLibrary.get("MIND TRICK");
             case 68:
-                return featLibrary.get("MULTISHOT");
+                return featLibrary.get("MOBILITY");
             case 69:
-                return featLibrary.get("NIMBLE");
+                return featLibrary.get("MULTISHOT");
             case 70:
-                return featLibrary.get("PERSUASIVE");
+                return featLibrary.get("NIMBLE");
             case 71:
-                return featLibrary.get("POINT BLANK SHOT");
+                return featLibrary.get("PERSUASIVE");
             case 72:
-                return featLibrary.get("POWER ATTACK");
+                return featLibrary.get("POINT BLANK SHOT");
             case 73:
-                return featLibrary.get("PRECISE SHOT");
+                return featLibrary.get("POWER ATTACK");
             case 74:
-                return featLibrary.get("QUICK DRAW");
+                return featLibrary.get("PRECISE SHOT");
             case 75:
-                return featLibrary.get("QUICKNESS");
+                return featLibrary.get("QUICK DRAW");
             case 76:
-                return featLibrary.get("RAGE");
+                return featLibrary.get("QUICKNESS");
             case 77:
-                return featLibrary.get("RAPID SHOT");
+                return featLibrary.get("RAGE");
             case 78:
-                return featLibrary.get("RUGGED");
+                return featLibrary.get("RAPID SHOT");
             case 79:
-                return featLibrary.get("RUN");
+                return featLibrary.get("RUGGED");
             case 80:
-                return featLibrary.get("SHARP EYED");
+                return featLibrary.get("RUN");
             case 81:
-                return featLibrary.get("SHOT ON THE RUN");
+                return featLibrary.get("SHARP EYED");
             case 82:
-                return featLibrary.get("SKILL EMPHASIS");
+                return featLibrary.get("SHOT ON THE RUN");
             case 83:
-                return featLibrary.get("SPACER");
+                return featLibrary.get("SKILL EMPHASIS");
             case 84:
-                return featLibrary.get("SPRING ATTACK");
+                return featLibrary.get("SPACER");
             case 85:
-                return featLibrary.get("STAMINA");
+                return featLibrary.get("SPRING ATTACK");
             case 86:
-                return featLibrary.get("STARSHIP DODGE");
+                return featLibrary.get("STAMINA");
             case 87:
-                return featLibrary.get("STARSHIP OPERATION");
+                return featLibrary.get("STARSHIP DODGE");
             case 88:
-                return featLibrary.get("STEADY");
+                return featLibrary.get("STARSHIP OPERATION");
             case 89:
-                return featLibrary.get("STEALTHY");
+                return featLibrary.get("STEADY");
             case 90:
-                return featLibrary.get("SUNDER");
+                return featLibrary.get("STEALTHY");
             case 91:
-                return featLibrary.get("SURGERY");
+                return featLibrary.get("SUNDER");
             case 92:
-                return featLibrary.get("TOUGHNESS");
+                return featLibrary.get("SURGERY");
             case 93:
-                return featLibrary.get("TRACK");
+                return featLibrary.get("TOUGHNESS");
             case 94:
+                return featLibrary.get("TRACK");
+            case 95:
                 return featLibrary.get("TRICK");
 //            case 95:
 //                return featLibrary.get("");
