@@ -1660,6 +1660,7 @@ public class Player {
         featLibrary.put("RAPID SHOT", new RapidShot());
         featLibrary.put("RUGGED", new Rugged());
         featLibrary.put("RUN", new Run());
+        featLibrary.put("SENSE", new Sense());
         featLibrary.put("SHARP EYED", new SharpEyed());
         featLibrary.put("SHOT ON THE RUN", new ShotOnTheRun());
         featLibrary.put("SKILL EMPHASIS", new SkillEmphasis("Appraise"));
@@ -1702,7 +1703,7 @@ public class Player {
         if (this.feats.get(key).isInitialized())
             return;
         //check to see if the feat boosts skills
-        if (this.feats.get(key).areSkillsBoosted()) {
+        if (this.feats.get(key).areSkillsBoosted() || this.feats.get(key).areFSkillsBoosted()) {
             for (String featKey : this.feats.get(key).skillsBoosted.keySet()) {
                 //Go through and add the bonuses to the corresponding misc bonus in the player skill array.
                 if (printing)
@@ -1716,31 +1717,29 @@ public class Player {
                 }
             }
         }
-        //Alter force skills = 0, 2, 9, 10, 12, 14, 16, 17
-        if (key.contains("Alter")) {
-            forceSkills[0].setClassSkill(true);
-            forceSkills[2].setClassSkill(true);
-            forceSkills[9].setClassSkill(true);
-            forceSkills[10].setClassSkill(true);
-            forceSkills[12].setClassSkill(true);
-            forceSkills[14].setClassSkill(true);
-            forceSkills[16].setClassSkill(true);
-            forceSkills[17].setClassSkill(true);
+
+        if (key.contains("ALTER")) {
+            forceSkills[Skilltype.AFFECT_MIND.getIndex()].setClassSkill(true);
+            forceSkills[Skilltype.DRAIN_ENERGY.getIndex()].setClassSkill(true);
+            forceSkills[Skilltype.FORCE_GRIP.getIndex()].setClassSkill(true);
+            forceSkills[Skilltype.FORCE_LIGHTNING.getIndex()].setClassSkill(true);
+            forceSkills[Skilltype.FORCE_STRIKE.getIndex()].setClassSkill(true);
+            forceSkills[Skilltype.HEAL_ANOTHER.getIndex()].setClassSkill(true);
+            forceSkills[Skilltype.ILLUSION.getIndex()].setClassSkill(true);
+            forceSkills[Skilltype.MOVE_OBJECT.getIndex()].setClassSkill(true);
         }
-        //Control force skills = 1, 8, 11, 15
-        if (key.contains("Control")) {
-            forceSkills[1].setClassSkill(true);
-            forceSkills[8].setClassSkill(true);
-            forceSkills[11].setClassSkill(true);
-            forceSkills[15].setClassSkill(true);
+        if (key.contains("CONTROL")) {
+            forceSkills[Skilltype.BATTLEMIND.getIndex()].setClassSkill(true);
+            forceSkills[Skilltype.FORCE_DEFENSE.getIndex()].setClassSkill(true);
+            forceSkills[Skilltype.FORCE_STEALTH.getIndex()].setClassSkill(true);
+            forceSkills[Skilltype.HEAL_SELF.getIndex()].setClassSkill(true);
         }
-        //Sense force skills = 5, 6, 7, 18, 19
-        if (key.contains("Sense")) {
-            forceSkills[5].setClassSkill(true);
-            forceSkills[6].setClassSkill(true);
-            forceSkills[7].setClassSkill(true);
-            forceSkills[18].setClassSkill(true);
-            forceSkills[19].setClassSkill(true);
+        if (key.contains("SENSE")) {
+            forceSkills[Skilltype.ENHANCE_SENSES.getIndex()].setClassSkill(true);
+            forceSkills[Skilltype.FARSEEING.getIndex()].setClassSkill(true);
+            forceSkills[Skilltype.FEAR.getIndex()].setClassSkill(true);
+            forceSkills[Skilltype.SEE_FORCE.getIndex()].setClassSkill(true);
+            forceSkills[Skilltype.TELEPATHY.getIndex()].setClassSkill(true);
         }
         if (this.feats.get(key).getMiscBonus() > 0)
             switch (key) {
@@ -1823,7 +1822,7 @@ public class Player {
      */
     private boolean meetsPrereqs(Feat f, boolean printing) {
         boolean out = false;
-        StringBuilder requirements = new StringBuilder("");
+        StringBuilder requirements = new StringBuilder();
         HashMap<String,Integer> map = f.getPrereqs();
         boolean hasFailures = false;
         String key;
@@ -1972,7 +1971,7 @@ public class Player {
      * Tries to add a feat for a player, first checking if the prerequisites are met for said feat.
      * @param s The String name of the feat, used to access the feat library hashmap as a key.
      * @param printing Used for debugging
-     * @return true if the feat is successfully added, false otherwise.
+     * @return true if the feat is successfully added.
      */
     public boolean addFeat(String s, boolean printing) {
         s = s.toUpperCase();
@@ -1981,6 +1980,7 @@ public class Player {
         if (this.meetsPrereqs(f, printing)) {
             out = true;
             this.feats.put(s,f);
+            this.initializeFeat(s, printing);
             if (printing)
                 System.out.printf("     Successfully added %s to %s's feats.%n%n", s, this.name);
         }

@@ -75,5 +75,6 @@ public enum Skilltype {
     }
 
     public Attribute getAttribute() { return type; }
+    public int getIndex() { return i; }
     public String getName() { return this.name; }
 }
