@@ -35,7 +35,7 @@ public class PlayerTest {
     @Test
     public void printConstructor3() {
 //        System.out.println("Testing printConstructor3");
-        Player gunthar = new Player(Species.CEREAN, new Scout(), 4, true, "list");
+        Player gunthar = new Player(Species.HUMAN, new Thug(), 2, false, "list");
         gunthar.printSkills();
         gunthar.printAttributes();
         gunthar.printCombat();
