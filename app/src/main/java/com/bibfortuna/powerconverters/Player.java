@@ -1989,6 +1989,10 @@ public class Player {
         return out;
     }
 
+    public boolean addFeat(String s) {
+        return this.addFeat(s, false);
+    }
+
     /** TODO
      *  Helper method to determine a truly random Feat from the selection of all possible Feats. Upon
      *  first approach of this method, I believe we need another method that will index all Feats to ints.

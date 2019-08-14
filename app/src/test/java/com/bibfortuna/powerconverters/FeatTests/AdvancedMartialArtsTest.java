@@ -2,6 +2,8 @@ package com.bibfortuna.powerconverters.FeatTests;
 import org.junit.Test;
 
 import com.bibfortuna.powerconverters.Classes.*;
+import com.bibfortuna.powerconverters.Feats.AdvancedMartialArts;
+import com.bibfortuna.powerconverters.Feats.Feat;
 import com.bibfortuna.powerconverters.Player;
 import com.bibfortuna.powerconverters.Species;
 
@@ -34,5 +36,13 @@ public class AdvancedMartialArtsTest {
         assert(!tester3.addFeat("Advanced Martial Arts", false));
         assert(tester3.addFeat("Improved Martial Arts", false));
         assert(tester3.addFeat("Advanced Martial Arts", false));
+
+        Feat featTest = new AdvancedMartialArts();
+        assert(!featTest.isActivatedAbility());
+        assert(featTest.getPrereqs().size() == 3);
+        assert(!featTest.isActivatedAbility());
+        assert(featTest.getType() == "");
+        assert(featTest.getSimpleVitalityCost() == 0);
+        assert(!featTest.getCanTake10());
     }
 }

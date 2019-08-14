@@ -1,5 +1,9 @@
 package com.bibfortuna.powerconverters.FeatTests;
 import org.junit.Test;
+
+import com.bibfortuna.powerconverters.Feats.Acrobatic;
+import com.bibfortuna.powerconverters.Feats.BurstOfSpeed;
+import com.bibfortuna.powerconverters.Feats.Feat;
 import com.bibfortuna.powerconverters.Player;
 
 public class AcrobaticTest {
@@ -24,5 +28,13 @@ public class AcrobaticTest {
         assert(totalJump == newTotalJump - 2);
         assert(miscJump == newMiscJump - 2);
         tester.printSkills();
+
+        Feat featTest = new Acrobatic();
+        assert(!featTest.isActivatedAbility());
+        assert(featTest.getPrereqs().size() == 0);
+        assert(!featTest.isActivatedAbility());
+        assert(featTest.getType() == "");
+        assert(featTest.getSimpleVitalityCost() == 0);
+        assert(!featTest.getCanTake10());
     }
 }

@@ -14,7 +14,7 @@ public class BurstOfSpeed extends Feat {
                 "       for this feat.");
         prereqs.put("FORCE SENSITIVE", 1);
         prereqs.put("CONTROL", 1);
-        prereqs.put("FLV", 1);
+        prereqs.put("FLV", 3);
         setActionType("Free action");
         setSimpleVitalityCost(5);
         setIsActivatedAbility(true);
