@@ -16,7 +16,7 @@ public class AwareTest {
         assert(!tester1.hasFeat("AWARE"));
         assert(!tester1.addFeat("Aware", false));
         assert(tester1.addFeat("Force Sensitive", false));
-        assert(tester1.hasFeat("FORCE SENSITIVE"));
+        assert(tester1.hasFeat("Force Sensitive"));
         assert(!tester1.addFeat("Aware", false));
         assert(tester1.addFeat("Sense", false));
         assert(tester1.hasFeat("SENSE"));
@@ -32,7 +32,7 @@ public class AwareTest {
         assert(!tester2.hasFeat("AWARE"));
         assert(!tester2.addFeat("Aware", false));
         assert(tester2.addFeat("Force Sensitive", false));
-        assert(tester2.hasFeat("FORCE SENSITIVE"));
+        assert(tester2.hasFeat("Force Sensitive"));
         assert(!tester2.addFeat("Aware", false));
         int boostedEnhanceSenses2 = tester2.forceSkills[Skilltype.ENHANCE_SENSES.getIndex()].getMisc();
         int boostedSeeForce2 = tester2.forceSkills[Skilltype.SEE_FORCE.getIndex()].getMisc();

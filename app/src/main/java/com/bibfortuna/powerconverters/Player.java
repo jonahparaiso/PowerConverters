@@ -2016,6 +2016,13 @@ public class Player {
         return null;
     }
 
+    /**
+     * Getter method to retrieve a Feat from the library, based on if they were organized in ascending
+     * alphabetic order. For example, indexToFeat(55) should return (Feat) KnightSpeed.
+     *
+     * @param i int index of the alphabetic order of all vanilla (Revised Core Rulebook) Feats.
+     * @return  Feat representation of the passed in int.
+     */
     public Feat indexToFeat(int i) {
         switch (i) {
             case 0:
@@ -2265,7 +2272,7 @@ public class Player {
 
     /**
      * Getter method for determining whether a Player has a given Feat.
-     * @param feat The String representation of the desired Feat
+     * @param feat The String representation of the desired Feat, format should be
      * @return True if the Player contains that Feat
      */
     public boolean hasFeat(String feat) {
